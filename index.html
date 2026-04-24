@@ -1,1714 +1,648 @@
-<!DOCTYPE html>
-<html lang="zh-TW" class="scroll-smooth">
+<!doctype html>
+<html lang="zh-Hant">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Millie Wei | Portfolio</title>
-    
-    <!-- 1. 引入 Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- 2. 引入 Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
-    <link rel="manifest" href="/site.webmanifest">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Portfolio — Millie Wei</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=VT323&family=Press+Start+2P&family=Silkscreen:wght@400;700&family=Jersey+15&family=Chakra+Petch:wght@400;500;600;700&family=DotGothic16&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon_io/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon_io/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
 
-    <!-- 3. 設定 Google Fonts (Valorant Style Fonts) -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Rajdhani:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&display=swap" rel="stylesheet">
+<script>
+  // ========= TWEAKS (editmode) =========
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "accent": "#E85D2F",
+    "personalDark": true,
+    "commercialLayout": "grid",
+    "displayFont": "vt323"
+  }/*EDITMODE-END*/;
+  window.__TWEAKS = { ...TWEAK_DEFAULTS };
 
-    <!-- 4. 自定義配置 (Valorant 配色) -->
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        valMain: '#E67E22',    // Valorant Red #E67E22 (替換為您的橘色)
-                        valDark: '#0A0E17',   // Navy/Black
-                        valLight: '#F3F4F6',  // Off-White
-                        valGray: '#9CA3AF',   // Mid Gray
-                        valDarker: '#000000',
-                    },
-                    fontFamily: {
-                        valTitle: ['"Doto"', 'sans-serif'],
-                        valBody: ['"Noto Sans TC"', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+          serif: ['"VT323"', '"DotGothic16"', 'ui-monospace', 'monospace'],
+          sans: ['"Noto Sans TC"', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        },
+      }
+    }
+  };
+</script>
 
-    <!-- 5. 自定義樣式 -->
-    <style>
-         @font-face {
-            font-family: 'Cubic 11';
-            src:
-                url("https://cdn.jsdelivr.net/gh/ACh-K/Cubic-11@main/fonts/web/Cubic_11.woff2") format("woff2"),
-                url("https://cdn.jsdelivr.net/gh/ACh-K/Cubic-11@main/fonts/web/Cubic_11.woff") format("woff");
-            font-weight: 400;
-            font-style: normal;
-            font-display: swap;
-        }
-        .font-cubic {
-            font-family: 'Cubic 11', sans-serif;
-        }
+<style>
+  :root {
+    --bg: #FAFAF7;
+    --surface: #FFFFFF;
+    --ink: #111111;
+    --ink-muted: #6B6B6B;
+    --ink-faint: #A0A0A0;
+    --hairline: #E5E5E0;
+    --hairline-strong: #D4D4CE;
+    --accent: #E85D2F;
+    --dark-bg: #0E0E0E;
+    --dark-surface: #1A1A1A;
+    --dark-hairline: #2A2A2A;
+  }
+  html, body { background: var(--bg); color: var(--ink); }
+  body {
+    font-family: 'Noto Sans TC', -apple-system, sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  .font-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: -0.01em; }
 
-        body {
-            background-color: #0F1923;
-            color: #ECE8E1;
-        }
+  /* Display font — switchable via --display-font (Tweaks) */
+  :root { --display-font: 'VT323', 'DotGothic16', 'JetBrains Mono', monospace; --display-tracking: 0em; --display-weight: 400; }
+  .font-serif-display {
+    font-family: var(--display-font);
+    font-weight: var(--display-weight);
+    font-style: normal !important;       /* pixel fonts have no italic — avoid fake-slant */
+    letter-spacing: var(--display-tracking);
+    text-transform: none;
+  }
+  /* make any inline italic inside display text render upright */
+  .font-serif-display i, .font-serif-display em { font-style: normal; }
 
-        h1, h2, h3, .doto-font { font-family: 'Doto', sans-serif; }
+  /* Fine hairline dividers */
+  .hairline { background: var(--hairline-strong); }
+  .border-hairline { border-color: var(--hairline-strong); }
 
-        /* 銳利切角效果 (Chamfered Corners) */
-        .clip-corner {
-            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
-        }
-        .clip-corner-tl {
-            clip-path: polygon(15px 0, 100% 0, 100% 100%, 0 100%, 0 15px);
-        }
-        
-        /* 特戰按鈕 */
-        .val-btn {
-            background-color: #E67E22;
-            color: #ECE8E1;
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        .val-btn::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border: 1px solid #E67E22;
-            transform: translate(-5px, -5px);
-            transition: all 0.3s ease;
-            z-index: 0;
-        }
-        .val-btn:hover::before {
-            transform: translate(0, 0);
-        }
-        .val-btn > * {
-            position: relative;
-            z-index: 1;
-        }
+  /* Accent */
+  .text-accent { color: var(--accent); }
+  .bg-accent { background: var(--accent); }
+  .border-accent { border-color: var(--accent); }
 
-        /* 卡片懸停特效 */
-        .val-card {
-            transition: all 0.3s ease;
-        }
-        .val-card:hover {
-            background-color: #E67E22;
-            border-color: #E67E22;
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px -10px rgba(255, 70, 85, 0.4);
-        }
+  /* Tab underline */
+  .tab-btn { position: relative; transition: color .2s; }
+  .tab-btn[data-active="true"] { color: var(--ink); }
+  .tab-btn[data-active="false"] { color: var(--ink-faint); }
+  .tab-btn::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: -13px;
+    height: 1px; background: var(--ink); transform: scaleX(0); transform-origin: left;
+    transition: transform .3s cubic-bezier(.2,.7,.2,1);
+  }
+  .tab-btn[data-active="true"]::after { transform: scaleX(1); }
 
-        /* 幾何點綴 (十字與方塊) */
-        .crosshair {
-            position: relative;
-            width: 10px;
-            height: 10px;
-        }
-        .crosshair::before, .crosshair::after {
-            content: '';
-            position: absolute;
-            background-color: #E67E22;
-        }
-        .crosshair::before { width: 100%; height: 2px; top: 4px; left: 0; }
-        .crosshair::after { height: 100%; width: 2px; left: 4px; top: 0; }
+  /* Work card hover */
+  .work-card { transition: transform .35s cubic-bezier(.2,.7,.2,1); }
+  .work-card .work-arrow { transition: transform .25s ease; display: inline-block; }
+  .work-card:hover .work-arrow { transform: translate(3px, -3px); }
+  .work-card .work-title-underline {
+    background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+    transition: background-size .35s cubic-bezier(.2,.7,.2,1);
+  }
+  .work-card:hover .work-title-underline { background-size: 100% 1px; }
+  .work-card .cover-img { transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+  .work-card:hover .cover-img { transform: scale(1.03); }
+    /* 封面圖預設灰階，hover 時還原彩色 */
+    .work-card img {
+      filter: grayscale(1);
+      transition: filter .4s ease;
+    }
+    .work-card:hover img {
+      filter: grayscale(0);
+    }
 
-        /* 網格背景 */
-        .bg-grid-dark {
-            background-image: radial-gradient(#333 1px, transparent 1px);
-            background-size: 20px 20px;
-        }
-        .bg-grid-light {
-            background-image: radial-gradient(#ccc 1px, transparent 1px);
-            background-size: 20px 20px;
-        }
+  /* Cover placeholder — for images that fail or are loading */
+  .cover-ph {
+    background-image:
+      repeating-linear-gradient(135deg, rgba(0,0,0,0.035) 0 1px, transparent 1px 9px),
+      linear-gradient(#f4f4ef, #eceae3);
+  }
+  .cover-ph-dark {
+    background-image:
+      repeating-linear-gradient(135deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 9px),
+      linear-gradient(#181818, #0e0e0e);
+  }
 
-        /* 大標題空心字 */
-        .text-outline {
-            color: transparent;
-            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.2);
-        }
-        .text-outline-dark {
-            color: transparent;
-            -webkit-text-stroke: 1px rgba(15, 25, 35, 0.1);
-        }
+  /* Marquee */
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .marquee-track { animation: marquee 40s linear infinite; }
 
-        /* 點陣對話框 (線條改細為 2px，使用像素陰影) */
-        .pixel-dialog {
-            position: relative;
-            background-color: #F3F4F6; /* valLight */
-            box-shadow: 
-                -2px 0 0 0 #E67E22,
-                2px 0 0 0 #E67E22,
-                0 -2px 0 0 #E67E22,
-                0 2px 0 0 #E67E22;
-            margin: 2px; /* 保留陰影空間 */
-            filter: drop-shadow(4px 4px 0 rgba(255, 209, 169, 0.15));
-        }
+  /* Hero line-art placeholder subtle movement */
+  @keyframes floaty { 0%,100%{transform:translate(0,0)} 50%{transform:translate(0,-4px)} }
+  .floaty { animation: floaty 5s ease-in-out infinite; }
 
-        /* RPG 系統通知框 - 縮小且素雅版 */
-        .rpg-sys-box {
-            background-color: #0A0E17;
-            border: 2px solid #E67E22;
-            border-radius: 4px;
-            box-shadow: inset 0 0 10px rgba(230,126,34,0.1), 4px 4px 0px rgba(230, 126, 34, 0.15);
-            transition: all 0.2s ease-in-out;
-        }
-        .rpg-sys-box:hover {
-            transform: translate(-1px, -1px);
-            box-shadow: inset 0 0 15px rgba(230,126,34,0.2), 5px 5px 0px rgba(230, 126, 34, 0.3);
-            background-color: #111824; 
-            border-color: #E67E22; 
-        }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-        .animate-blink {
-            animation: blink 1s step-end infinite;
-        }
-        .rpg-arrow {
-            opacity: 0;
-            transform: translateX(-5px);
-            transition: all 0.2s ease;
-        }
-        .rpg-sys-box:hover .rpg-arrow {
-            opacity: 1;
-            transform: translateX(0);
-            color: #ECE8E1;
-        }
+  /* Live indicator pulse */
+  @keyframes livepulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50%      { opacity: .4; transform: scale(.75); }
+  }
 
-        /* 隱藏捲軸 */
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        
-        ::selection { background-color: #E67E22; color: #ECE8E1; }
+  /* Section index pills */
+  .nav-pill { transition: color .15s; }
+  .nav-pill:hover { color: var(--ink); }
+  .nav-pill[data-on="true"] { color: var(--accent); }
 
-        /* 掃描線效果 */
-        .scanlines {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        /* 產生 2px 一循環的黑線與透明間隔 */
-        background: linear-gradient(
-            to bottom,
-            rgba(18, 16, 16, 0) 50%,
-            rgba(0, 0, 0, 0.25) 50%
-        );
-        background-size: 100% 4px; /* 調整這個數字可以改變線條粗細 */
-        z-index: 2;
-        pointer-events: none;
-        }
+  /* Personal dark mode */
+  body[data-personal-dark="true"] .personal-section {
+    background: var(--dark-bg); color: #F5F5F0;
+  }
+  body[data-personal-dark="true"] .personal-section .personal-card {
+    background: var(--dark-surface); border-color: var(--dark-hairline);
+  }
+  body[data-personal-dark="true"] .personal-section .muted { color: #8A8A85; }
+  body[data-personal-dark="true"] .personal-section .hairline-personal { background: var(--dark-hairline); }
+  body[data-personal-dark="false"] .personal-section .hairline-personal { background: var(--hairline-strong); }
+  body[data-personal-dark="false"] .personal-section .personal-card {
+    background: #FFFFFF; border-color: var(--hairline-strong);
+  }
 
-        /* 復古螢幕微光與像素感 */
-        .crt-overlay {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        /* 模擬螢幕四周較暗的邊角失光效果 */
-        background: radial-gradient(
-            circle,
-            rgba(18, 16, 16, 0) 50%,
-            rgba(18, 16, 16, 0.4) 100%
-        );
-        z-index: 3;
-        pointer-events: none;
-        }
+  /* Scrollbar minimal */
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: #d7d7d0; border-radius: 10px; }
+  ::-webkit-scrollbar-thumb:hover { background: #bcbcb4; }
 
-        /* (進階) 讓掃描線動起來的動畫 */
-        .scanlines::before {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 100px;
-        background: linear-gradient(
-            to bottom,
-            rgba(255, 255, 255, 0) 0%,
-            rgba(255, 255, 255, 0.05) 50%,
-            rgba(255, 255, 255, 0) 100%
-        );
-        animation: scanning 8s linear infinite;
-        }
+  /* Tweaks panel */
+  .tweaks-panel {
+    position: fixed; right: 20px; bottom: 20px; z-index: 80;
+    background: #FFFFFF; border: 1px solid var(--hairline-strong);
+    border-radius: 14px; padding: 14px; width: 240px;
+    box-shadow: 0 4px 24px rgba(0,0,0,.06);
+    font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    display: none;
+  }
+  .tweaks-panel[data-open="true"] { display: block; }
+  .tweaks-swatch { width: 22px; height: 22px; border-radius: 999px; border: 1px solid var(--hairline-strong); cursor: pointer; }
+  .tweaks-swatch[data-on="true"] { outline: 2px solid var(--ink); outline-offset: 2px; }
+  .tweaks-toggle {
+    display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+    padding: 4px 8px; border: 1px solid var(--hairline-strong); border-radius: 999px;
+    font-size: 10px;
+  }
+  .tweaks-toggle[data-on="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
 
-        @keyframes scanning {
-        0% { top: -100px; }
-        100% { top: 100%; }
-        }
+  /* Responsive horizontal scroll for personal cards */
+  .hscroll { scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+  .hscroll > * { scroll-snap-align: start; }
 
-        /* 標題字動畫 */
-        .wave-text span {
-            display: inline-block;
-            animation: wave 2s ease-in-out infinite, color-change 4s infinite alternate; /* Animation named "color-change" lasts 4s, loops infinitely, and reverses direction */
-        }
+  /* Accent-bound helpers */
+  .accent-underline { text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 4px; text-decoration-thickness: 2px; }
+  a.link-accent { color: var(--accent); }
+  a.link-accent:hover { text-decoration: underline; text-underline-offset: 3px; }
 
-        .wave-text span:nth-child(1) {
-            animation-delay: 0s;
-        }
-        .wave-text span:nth-child(2) {
-            animation-delay: 0.2s;
-        }
-        .wave-text span:nth-child(3) {
-            animation-delay: 0.4s;
-        }
-        .wave-text span:nth-child(4) {
-            animation-delay: 0.6s;
-        }
-        .wave-text span:nth-child(5) {
-            animation-delay: 0.8s;
-        }
-        .wave-text span:nth-child(6) {
-            animation-delay: 1s;
-        }
-        .wave-text span:nth-child(7) {
-            animation-delay: 1.2s;
-        }
+  /* Category chip */
+  .chip {
+    display: inline-block; padding: 2px 8px; border: 1px solid var(--hairline-strong);
+    border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    letter-spacing: 0.04em; color: var(--ink-muted);
+  }
+  body[data-personal-dark="true"] .personal-section .chip {
+    border-color: var(--dark-hairline); color: #A0A09A;
+  }
 
-        .color-change{
-            animation: color-change 4s infinite alternate;
-        }
+  /* Numbering */
+  .num { font-variant-numeric: tabular-nums; }
 
-        @keyframes wave {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-15px);
-            }
-        }
-        @keyframes color-change {
-            0% { color: #E67E22; }
-            50% { color: #e6bf22; }
-            100% { color: #E67E22; }
-        }
+  /* ===== Side rail (desktop) ===== */
+  .rail-item {
+    position: relative;
+    display: flex; align-items: baseline; gap: 14px;
+    padding: 9px 0 9px 14px;
+    color: var(--ink-muted);
+    transition: color .2s, padding .25s cubic-bezier(.2,.7,.2,1);
+  }
+  .rail-item .rail-num {
+    font-size: 10px; letter-spacing: 0.05em;
+    color: var(--ink-faint); min-width: 20px;
+    transition: color .2s;
+  }
+  .rail-item .rail-label {
+    letter-spacing: 0.05em;
+    transition: letter-spacing .25s cubic-bezier(.2,.7,.2,1);
+  }
+  /* animated left marker line */
+  .rail-item::before {
+    content: ""; position: absolute;
+    left: 0; top: 50%; transform: translateY(-50%);
+    height: 1px; width: 0;
+    background: currentColor;
+    transition: width .35s cubic-bezier(.2,.7,.2,1);
+  }
+  .rail-item:hover { color: var(--ink); padding-left: 18px; }
+  .rail-item:hover .rail-num { color: var(--ink-muted); }
+  .rail-item:hover::before { width: 8px; }
 
-        /* 預設情況下顯示 (電腦版) */
-        .desktop-only {
-            display: inline;
-        }
+  /* active state (driven by data-on attr set via IntersectionObserver) */
+  .rail-item[data-on="true"] {
+    color: var(--accent);
+    padding-left: 22px;
+  }
+  .rail-item[data-on="true"] .rail-num { color: var(--accent); opacity: .6; }
+  .rail-item[data-on="true"]::before {
+    width: 14px; background: var(--accent); height: 2px;
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 18%, transparent);
+  }
 
-        /* 當螢幕寬度小於或等於 768px (手機版) */
-        @media (max-width: 768px) {
-            .desktop-only {
-                display: none;
-            }
-        }
-
-    </style>
+  /* content offset for desktop */
+  @media (min-width: 1024px) {
+    body { padding-left: 220px; }
+    main { padding-top: 0 !important; }
+    /* hide hero top live widget on desktop — now lives in rail */
+    #hero-live { display: none !important; }
+  }
+</style>
 </head>
-<body class="font-valBody text-lg overflow-x-hidden selection:bg-valMain selection:text-valLight">
 
-    <!-- 導覽列 (Top HUD) -->
-    <nav id="navbar" class="fixed top-0 w-full z-50 py-4 transition-all duration-300 border-b border-white/5 bg-valDark/90 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
-            
-            <!-- Logo Area -->
-            <div class="flex items-center gap-6">
-                <div class="hidden md:flex flex-col">
-                    <span class="font-valTitle text-xl tracking-widest text-valLight leading-none">MILLIE.</span>
-                </div>
-            </div>
-            
-            <div class="flex items-center gap-8">
-                <!-- 頁面連結 -->
-                <div class="hidden lg:flex gap-8 font-valTitle text-sm tracking-widest text-valLight/60">
-                    <a href="#about" class="hover:text-valMain transition-colors relative group" data-i18n="nav.about">About</a>
-                    <a href="#work" class="hover:text-valMain transition-colors relative group" data-i18n="nav.work">Works</a>
-                    <a href="#experience" class="hover:text-valMain transition-colors relative group" data-i18n="nav.experience">Experience</a>
-                    <a href="https://drive.google.com/file/d/1W8EIoQdcIgUVH-MIEzfMtoWfqbWrNY1S/view?usp=drive_link" target="_blank" rel="noopener" class="text-valMain/80 hover:text-valMain transition-colors relative group" data-i18n="nav.resume">Resume</a>
-                </div>
-                
-                <!-- 語言切換 -->
-                <div class="flex bg-valDarker border border-white/10 p-1 gap-1">
-                    <button onclick="setLang('zh')" id="btn-zh" class="lang-btn bg-valMain text-valLight px-3 py-1 text-xs font-bold font-valBody tracking-wider">ZH</button>
-                    <button onclick="setLang('en')" id="btn-en" class="lang-btn text-valGray hover:text-valLight px-3 py-1 text-xs font-bold font-valBody tracking-wider transition-colors">EN</button>
-                    <button onclick="setLang('ja')" id="btn-ja" class="lang-btn text-valGray hover:text-valLight px-3 py-1 text-xs font-bold font-valBody tracking-wider transition-colors">JA</button>
-                </div>
-            </div>
-        </div>
+<body data-personal-dark="true" data-commercial-layout="grid">
+
+<!-- ========= HEADER / NAV (mobile only — lg+ uses side rail) ========= -->
+<header class="lg:hidden fixed top-0 left-0 right-0 z-50 backdrop-blur-sm bg-[rgba(250,250,247,0.75)] border-b border-hairline">
+  <div class="max-w-[1400px] mx-auto px-6 md:px-10 h-14 flex items-center justify-between">
+    <a href="#top" class="font-mono text-[12px] font-medium tracking-tight">
+      MILLIE <span style="color:var(--ink-faint)">/</span>&nbsp;PORTFOLIO
+    </a>
+    <nav class="hidden md:flex items-center gap-5 font-mono text-[11px]">
+      <a href="#hero"        class="nav-pill" data-target="hero">→ 01 INDEX</a>
+      <a href="#about"       class="nav-pill" data-target="about">02 ABOUT</a>
+      <a href="#commercial"  class="nav-pill" data-target="commercial">03 WORKS</a>
+      <a href="#personal"    class="nav-pill" data-target="Indie ">04 INDIE DEV</a>
+      <a href="#contact"     class="nav-pill" data-target="contact">05 CONTACT</a>
+    </nav>
+    <a href="#contact" class="md:hidden font-mono text-[11px] underline underline-offset-4">CONTACT</a>
+  </div>
+</header>
+
+<!-- ========= SIDE RAIL (desktop only — lg+) ========= -->
+<aside id="siderail" class="hidden lg:flex fixed top-0 left-0 bottom-0 z-50 w-[220px] flex-col justify-between pointer-events-none">
+  <!-- subtle bg veil so content doesn't bleed under -->
+  <div class="absolute inset-0 pointer-events-none" style="background: linear-gradient(90deg, var(--bg) 0%, var(--bg) 82%, transparent 100%); border-right: 1px solid var(--hairline-strong);"></div>
+
+  <!-- inner -->
+  <div class="relative z-10 pointer-events-auto flex flex-col h-full px-7 py-8">
+
+    <!-- corner brackets -->
+    <span class="absolute top-3 left-3 font-mono text-[10px]" style="color:var(--ink-faint)">┌</span>
+    <span class="absolute top-3 right-3 font-mono text-[10px]" style="color:var(--ink-faint)">┐</span>
+    <span class="absolute bottom-3 left-3 font-mono text-[10px]" style="color:var(--ink-faint)">└</span>
+    <span class="absolute bottom-3 right-3 font-mono text-[10px]" style="color:var(--ink-faint)">┘</span>
+
+    <!-- TOP: logo / ident -->
+    <a href="#top" class="block">
+      <div class="mt-3 font-serif-display text-[25px] leading-[0.95]"><img src="img/Logo.png" alt="Millie Wei logo" class="w-10 h-10" style="margin-top: 64px; margin-left: 9px; display: inline-block;"> */</div>
+    </a>
+
+    <!-- MID: nav -->
+    <nav id="siderail-nav" class="mt-10 font-mono text-[12px] flex flex-col gap-[2px]">
+      <a href="#hero"       class="rail-item" data-target="hero">       <span class="rail-num">01</span><span class="rail-label">INDEX</span></a>
+      <a href="#about"      class="rail-item" data-target="about">      <span class="rail-num">02</span><span class="rail-label">ABOUT</span></a>
+      <a href="#commercial" class="rail-item" data-target="commercial"> <span class="rail-num">03</span><span class="rail-label">WORKS</span></a>
+      <a href="#personal"   class="rail-item" data-target="personal">   <span class="rail-num">04</span><span class="rail-label">INDIE DEV</span></a>
+      <a href="#contact"    class="rail-item" data-target="contact">    <span class="rail-num">05</span><span class="rail-label">CONTACT</span></a>
     </nav>
 
-    <!-- 英雄區：Hero Screen -->
-    <section class="relative min-h-[90vh] flex flex-col justify-center overflow-hidden bg-valDark pt-20">
-        <!-- 背景影片 -->
-        <div class="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-            <!-- 透過寬高比 CSS 技巧，讓 iframe 強制充滿畫面不留黑邊 -->
-            <iframe 
-                class="absolute top-1/2 left-1/2 w-[100vw] h-[56.25vw] min-h-[100vh] min-w-[177.77vh] -translate-x-1/2 -translate-y-1/2 opacity-40 mix-blend-luminosity" 
-                src="https://www.youtube.com/embed/vodym1DOBr8?autoplay=1&mute=1&controls=0&loop=1&playlist=vodym1DOBr8&playsinline=1&rel=0&modestbranding=1" 
-                frameborder="0" 
-                referrerpolicy="strict-origin-when-cross-origin"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-            </iframe>
-        </div>
-        <div class="scanlines"></div>
-        <div class="crt-overlay"></div>
-        
-        <div class="absolute inset-0 bg-valDark/30 z-[4]"></div>
+    <!-- spacer -->
+    <div class="flex-1"></div>
 
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none z-5">
-            <h1 class="font-valTitle text-[15vw] leading-none text-outline font-bold whitespace-nowrap opacity-50">M I L L I E</h1>
-        </div>
+    <!-- LIVE WIDGET -->
+    <div class="font-mono text-[10px] leading-[1.8]" style="color:var(--ink-muted)">
+      <div class="flex items-center gap-2">
+        <span class="inline-block w-[6px] h-[6px] rounded-full" style="background: var(--accent); box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 25%, transparent); animation: livepulse 1.8s ease-in-out infinite;"></span>
+        <span>TAIPEI / 台北</span>
+      </div>
+      <div class="mt-1 num"><span id="rail-time">—</span></div>
+      <div class="num"><span id="rail-wx-icon" aria-hidden="true">◌</span>&nbsp;<span id="rail-wx-temp">—</span></div>
+    </div>
 
-        <div class="max-w-7xl mx-auto px-6 relative z-10 w-full">
-        </div>
-        <!-- 背景大字 Watermark -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center pointer-events-none z-1">
-            <h1 class="font-valTitle text-[15vw] leading-none text-outline font-bold whitespace-nowrap select-none">M I L L I E</h1>
-        </div>
-        
-        <!-- 背景裝飾 -->
-        <div class="absolute inset-0 bg-grid-dark opacity-30 z-1"></div>
-        <div class="absolute top-1/4 right-[10%] w-64 h-64 bg-valMain/10 rounded-full filter blur-[100px] pointer-events-none"></div>
+    <!-- socials -->
+    <div class="mt-5 pt-4 border-t border-hairline font-mono text-[10px] flex flex-col gap-1">
+      <a href="mailto:julieya.wei@gmail.com" class="hover:text-[var(--ink)]" style="color:var(--ink-faint)">EMAIL ↗</a>
+      <a href="https://www.behance.net/xiaorongwei" class="hover:text-[var(--ink)]" style="color:var(--ink-faint)">BEHANCE ↗</a>
+      <a href="https://www.pixiv.net/users/4556408" class="hover:text-[var(--ink)]" style="color:var(--ink-faint)">PIXIV ↗</a>
+    </div>
+  </div>
+</aside>
 
-        <div class="max-w-7xl mx-auto px-6 relative z-10 w-full">
-            <div class="flex flex-col items-start border-l-4 border-valMain pl-6 md:pl-10">
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="crosshair"></div>
-                    <span class="text-valMain font-valBody font-bold tracking-[0.3em] text-sm uppercase">Defy The Limits</span>
-                </div>
-                
-                <h1 class="font-valTitle text-4xl font-black md:text-7xl lg:text-8xl text-valLight uppercase leading-[1.1] mb-6" data-i18n="hero.title">
-                    Turning playful ideas<br>into interactive products.
-                </h1>
-                
-                <p class="font-cubic text-valGray text-base md:text-base font-medium tracking-widest uppercase mt-2 bg-valDarker/50 px-4 py-2 border-l-4 border-valMain" data-i18n="hero.subtitle">
-                    // Creativity / Gamification / Intuition
-                </p>
+<main id="top" class="pt-14">
+
+  <!-- ========= HERO / 01 ========= -->
+  <section id="hero" class="relative border-b border-hairline">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-10 pt-16 md:pt-24 pb-20 md:pb-28">
+      <!-- top meta row -->
+      <div class="flex items-center justify-between font-mono text-[11px] mb-12 md:mb-20" style="color:var(--ink-muted)">
+        <span>§ 01 — INDEX</span>
+        <span id="hero-live" class="hidden md:inline-flex items-center gap-3" aria-live="polite">
+          <span class="inline-block w-[6px] h-[6px] rounded-full" style="background: var(--accent); box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 25%, transparent); animation: livepulse 1.8s ease-in-out infinite;"></span>
+          <span>TAIPEI / 台北</span>
+          <span style="opacity:.35">·</span>
+          <span id="hero-time" class="num" style="min-width: 7ch; display:inline-block; text-align:center;">—</span>
+          <span style="opacity:.35">·</span>
+          <span id="hero-weather" class="inline-flex items-center gap-[6px]">
+            <span id="hero-wx-icon" aria-hidden="true">◌</span>
+            <span id="hero-wx-temp" class="num">—</span>
+          </span>
+        </span>
+        <span class="num">:）</span>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-end">
+        <!-- LEFT: headline -->
+        <div class="lg:col-span-7">
+          <div class="font-mono text-[11px] mb-6" style="color:var(--ink-muted)">
+            DESIGNER&nbsp;·&nbsp;DEVELOPER&nbsp;·&nbsp;ANIMATOR&nbsp;·&nbsp;ILLUSTRATOR
+          </div>
+          <h1 class="text-[78px] md:text-[78px] lg:text-[96px] leading-[1.02] tracking-[-0.02em] font-light">
+            <span class="font-serif-display">Everything</span><br/>
+            can be,<span class="font-serif-display text-accent">&nbsp;FUN！</span>
+          </h1>
+          <p class="mt-8 text-[15px] md:text-[15px] leading-[1.9] max-w-[50ch]" style="color:var(--ink-muted)">
+            尼豪，我是 <span class="text-[var(--ink)] font-medium">央／Millie</span>，一位創作者／BUILDER。信仰可愛有魅力的造物，熱愛把 <span class="text-accent font-medium">有趣</span> 的點子變得觸手可及。
+          </p>
+
+          <!-- meta strip -->
+          <div class="mt-10 grid grid-cols-3 gap-4 md:gap-8 max-w-[520px] font-mono text-[11px]">
+            <div>
+              <div style="color:var(--ink-faint)">BASED</div>
+              <div class="mt-1">Taipei</div>
             </div>
-        </div>
-        
-        <!-- 底部切角裝飾條 -->
-        <div class="absolute bottom-0 left-0 w-full h-16 bg-valLight clip-corner-tl z-20 translate-y-1"></div>
-    </section>
-
-    <!-- Section 1: AGENT PROFILE (About & Awards) -->
-    <section id="about" class="pt-4 pb-40 bg-valLight text-valDark relative z-20">
-        <!-- 裝飾 -->
-        <div class="absolute top-10 right-10 text-outline-dark font-valTitle text-9xl font-bold opacity-50 pointer-events-none">01</div>
-        <div class="absolute inset-0 bg-grid-light opacity-30 pointer-events-none"></div>
-
-        <!-- 水平置中，且讓底邊對齊 -->
-        <div class="max-w-7xl mx-auto px-6 relative z-10 flex flex-col lg:flex-row gap-16 lg:gap-24 justify-center items-center lg:items-end">
-            
-            <!-- 左側群組：照片 + Role + 對話框 -->
-            <div class="flex flex-col w-full max-w-[420px]">
-                
-                <!-- 照片區 -->
-                <div class="w-full flex flex-col items-center justify-center lg:justify-start">
-                    <div class="w-80 h-80 relative group mb-8 p-1">
-                        <div class="w-80 h-80 flex flex-col items-center justify-center relative overflow-hidden">
-                            <img src="img/icon.gif" alt="Millie Profile" class="w-80 h-80 object-cover group-hover:saturate-100 transition-all duration-500 mix-blend-luminosity">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Role -->
-                <div class="flex flex-col gap-1 border-l-2 border-valMain pl-6">
-                    <p class="text-valGray font-valTitle tracking-widest text-sm uppercase">Role</p>
-                    <h2 class="font-valTitle text-2xl text-valDark uppercase font-black tracking-wide" data-i18n="about.role">UI/UX DESIGNER/DEVELOPER</h2>
-                    <div class="flex items-center gap-2 mt-2">
-                        <span class="w-2 h-2 bg-valMain"></span>
-                        <span class="font-valBody text-sm font-bold tracking-widest uppercase">Magician ✦</span>
-                    </div>
-                </div>
-
-                <!-- 描述 (純粹的 RPG 像素對話框) -->
-                <div class="w-full relative mt-10">
-                    <div class="pixel-dialog p-4 md:p-5 z-20 text-valMain">
-                        <!-- 對話框內容 (將字體大小固定為 text-[15px]) -->
-                        <p data-i18n="about.desc" class="font-cubic text-[13px] tracking-wide font-bold leading-[1.5]">
-                            <!-- JS 將會取代這裡 -->
-                        </p>
-                        
-                        <!-- 統一使用向上尾巴 (2px 網格)，因為對話框現在位於標題正下方 -->
-                        <svg class="absolute -top-[8px] left-8 w-[14px] h-[8px] z-10" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- 白色填補，覆蓋原本的黑框 -->
-                            <rect x="2" y="6" width="10" height="2" fill="#F3F4F6" />
-                            <rect x="4" y="4" width="6" height="2" fill="#F3F4F6" />
-                            <rect x="6" y="2" width="2" height="2" fill="#F3F4F6" />
-                            <!-- 黑色外框 (階梯狀) -->
-                            <rect x="0" y="6" width="2" height="2" fill="#E67E22" />
-                            <rect x="12" y="6" width="2" height="2" fill="#E67E22" />
-                            <rect x="2" y="4" width="2" height="2" fill="#E67E22" />
-                            <rect x="10" y="4" width="2" height="2" fill="#E67E22" />
-                            <rect x="4" y="2" width="2" height="2" fill="#E67E22" />
-                            <rect x="8" y="2" width="2" height="2" fill="#E67E22" />
-                            <rect x="6" y="0" width="2" height="2" fill="#E67E22" />
-                        </svg>
-                    </div>
-                </div>
+            <div>
+              <div style="color:var(--ink-faint)">STATUS</div>
+              <div class="mt-1"><span class="inline-block w-[6px] h-[6px] rounded-full bg-accent align-middle mr-1"></span>Open to work</div>
             </div>
-
-            <!-- 右側群組：獲獎紀錄 (Awards) -->
-            <div class="flex flex-col w-full max-w-[420px] md:mt-10 lg:mt-0">
-                <div class="w-full md:hidden"><hr /></div>
-                <div class="w-full flex flex-col gap-1 mt-10">
-                    <div class="flex items-center justify-start pb-2">
-                        <span class="w-2 h-2 bg-valMain"></span>
-                        <span class="pl-2 font-valBody text-sm font-bold tracking-widest uppercase">Nice to meet you</span>
-                    </div>
-                    <p data-i18n="about.detail" class="text-base leading-[1.8]">
-                            <!-- JS 將會取代這裡 -->
-                    </p>
-                </div>
-                <!-- 移除了原本的 border-l-2 border-valGray pl-6，拿掉分隔線 -->
-                <div class="w-full flex flex-col gap-1 mt-10">
-                    <div class="flex items-center justify-start pb-2">
-                        <span class="w-2 h-2 bg-valMain"></span>
-                        <span class="pl-2 font-valBody text-sm font-bold tracking-widest uppercase" data-i18n="titles.awards">ACCOLADES</span>
-                    </div>
-                    
-                    <div class="grid grid-cols-1 gap-4" id="awards-list">
-                        <!-- JS 渲染 -->
-                    </div>
-                </div>
-            </div>
-
+          </div>
         </div>
 
-        <!-- Floating RPG System Notification Box (縮小版等比例漂浮框) -->
-        <div class="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-1/2 w-full px-6 max-w-[26rem] z-40">
-            <a href="mailto:julieya.wei@gmail.com" class="group block w-full cursor-pointer">
-                <div class="rpg-sys-box p-4 md:p-5 font-cubic text-valLight relative overflow-hidden">
-                    <!-- 復古掃描線 (降低干擾) -->
-                    <div class="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.4)_50%)] bg-[length:100%_4px] pointer-events-none"></div>
-                    
-                    <div class="relative z-10">
-                        <div class="text-valMain text-[10px] md:text-xs mb-2.5 flex items-center gap-2 tracking-widest opacity-90">
-                            <i data-lucide="message-square" class="w-3.5 h-3.5"></i>
-                            <span>SYSTEM_NOTIFICATION</span>
-                        </div>
-                        
-                        <div class="text-sm md:text-base flex items-start gap-2.5 tracking-wider mb-5 text-valLight">
-                            <span class="text-valMain rpg-arrow mt-0.5 text-xs md:text-sm">▶</span>
-                            <span data-i18n="about.contactBtn" class="leading-snug">[ SYSTEM ] : RECRUIT TO PARTY?</span>
-                            <span class="inline-block w-2 h-4 bg-valMain animate-blink mt-0.5"></span>
-                        </div>
-                        
-                        <div class="flex gap-6 ml-6 md:ml-7 text-xs md:text-sm tracking-widest">
-                            <span class="text-valGray group-hover:text-valMain transition-colors flex items-center gap-2 md:gap-3">
-                                <span class="group-hover:animate-pulse font-bold text-valMain/80">[ Y ]</span> <span class="group-hover:text-valLight transition-colors">YES</span>
-                            </span>
-                            <span class="text-valGray opacity-40 flex items-center gap-2 md:gap-3">
-                                <span class="font-bold">[ N ]</span> NO
-                            </span>
-                        </div>
-                    </div>
-                </div>
-            </a>
+        <!-- RIGHT: line-art placeholder -->
+        <div class="lg:col-span-5">
+          <div class="relative">
+            <div class="aspect-square w-full rounded-[10px] border border-hairline relative overflow-hidden flex items-center justify-center">
+              <span class="absolute top-2 left-2 font-mono text-[9px]" style="color:var(--ink-faint)">+</span>
+              <span class="absolute top-2 right-2 font-mono text-[9px]" style="color:var(--ink-faint)">+</span>
+              <span class="absolute bottom-2 left-2 font-mono text-[9px]" style="color:var(--ink-faint)">+</span>
+              <span class="absolute bottom-2 right-2 font-mono text-[9px]" style="color:var(--ink-faint)">+</span>
+              <img src="img/hero-lineart.gif" alt="Animated mascot" class="w-[82%] h-[82%] object-contain floaty" style="image-rendering: pixelated;"/>
+            </div>
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
 
-    <!-- Section 2: ARSENAL (Selected Works) -->
-    <section id="work" class="pt-[200px] pb-24 bg-valDark text-valLight relative z-10">
-        <div class="absolute top-10 right-10 text-outline font-valTitle text-9xl font-bold opacity-30 pointer-events-none">02</div>
-        <div class="absolute inset-0 bg-grid-dark opacity-30 pointer-events-none"></div>
+    <!-- Marquee strip at bottom -->
+    <div class="border-t border-hairline overflow-hidden py-3" style="color:var(--ink-muted)">
+      <div class="marquee-track flex gap-10 whitespace-nowrap font-mono text-[12px] w-max">
+        <span>UI/UX</span><span>·</span><span>DEVELOPMENT</span><span>·</span><span>MOTION&nbsp;GRAPHICS</span><span>·</span><span>ILLUSTRATION</span><span>·</span><span>COMICS</span><span>·</span><span>INDIE&nbsp;GAMES</span><span>·</span><span>TOOLS</span><span>·</span>
+        <span>UI/UX</span><span>·</span><span>DEVELOPMENT</span><span>·</span><span>MOTION&nbsp;GRAPHICS</span><span>·</span><span>ILLUSTRATION</span><span>·</span><span>COMICS</span><span>·</span><span>INDIE&nbsp;GAMES</span><span>·</span><span>TOOLS</span><span>·</span>
+      </div>
+    </div>
+  </section>
 
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-            
-            <div class="flex flex-col md:flex-row justify-between items-end mb-12 border-b-2 border-white/10 pb-4 gap-6">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-1 bg-valMain"></div>
-                    <h2 class="font-valTitle text-4xl font-bold tracking-wider uppercase" data-i18n="titles.works">ARSENAL</h2>
-                </div>
-                
-                <!-- 分類按鈕 -->
-                <div id="category-filters" class="flex flex-wrap gap-2">
-                    <!-- JS 渲染 -->
-                </div>
-            </div>
-
-            <!-- 作品列表 -->
-            <div id="projects-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- JS 渲染 -->
-            </div>
+  <!-- ========= ABOUT / 02 ========= -->
+  <section id="about" class="border-b border-hairline">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-10 py-20 md:py-28">
+      <!-- section header -->
+      <div class="flex items-baseline justify-between mb-12 md:mb-16">
+        <div class="flex items-baseline gap-4 md:gap-6">
+          <span class="font-mono text-[11px]" style="color:var(--ink-muted)">§ 02</span>
+          <h2 class="font-serif-display text-[48px] md:text-[68px] leading-none">About</h2>
         </div>
-    </section>
+        <span class="font-mono text-[11px] hidden md:inline" style="color:var(--ink-muted)">— 歷程</span>
+      </div>
 
-    <!-- Section 3: CAREER (Experience & Education) -->
-    <section id="experience" class="py-24 bg-valLight text-valDark relative border-t-8 border-valMain">
-        <div class="absolute top-10 right-10 text-outline-dark font-valTitle text-9xl font-bold opacity-30 pointer-events-none">03</div>
-        <div class="max-w-7xl mx-auto px-6 relative z-10 flex flex-col lg:flex-row gap-16">
-            
-            <!-- 工作經歷 -->
-            <div class="w-full lg:w-1/2">
-                <div class="flex items-center gap-4 mb-10 border-b-2 border-valDark/10 pb-4">
-                    <span class="font-valTitle text-3xl font-bold tracking-wider uppercase" data-i18n="titles.experience">CAREER</span>
-                    <span class="font-valBody text-valMain text-sm tracking-widest font-bold">// EXP</span>
-                </div>
-                <div id="experience-list" class="space-y-6">
-                    <!-- JS 渲染 -->
-                </div>
-            </div>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+        <!-- LEFT blurb -->
+        <div class="lg:col-span-5">
+          <p class="text-[17px] md:text-[19px] leading-[1.9] tracking-[0.01em]" style="color:var(--ink)">
+            我是一位具備<span class="accent-underline">技術邏輯與創意願景</span>的跨領域設計師暨工程師，從資訊管理跨足至工業設計。超過三年業界經驗，並在日本九州大學交換期間建立國際視野。
+          </p>
+          <p class="mt-5 text-[14px] md:text-[15px] leading-[1.95]" style="color:var(--ink-muted)">
+            我擅長擔任設計師、工程師與產品經理之間的橋樑，把抽象的創意構思轉化為精確的技術需求。憑藉 IT 基礎，能在 Figma、Adobe、Blender、Unity 與 Web Front-end 之間自由切換。
+          </p>
 
-            <!-- 教育背景 -->
-            <div class="w-full lg:w-1/2">
-                <div class="flex items-center gap-4 mb-10 border-b-2 border-valDark/10 pb-4">
-                    <span class="font-valTitle text-3xl font-bold tracking-wider uppercase" data-i18n="titles.education">DOSSIER</span>
-                    <span class="font-valBody text-valMain text-sm tracking-widest font-bold">// HOGWARTS</span>
+          <!-- awards block -->
+          <div class="mt-10 pt-6 border-t border-hairline">
+            <div class="font-mono text-[11px] mb-4" style="color:var(--ink-faint)">AWARDS&nbsp;/&nbsp;獎項</div>
+            <ul class="space-y-3 text-[14px]">
+              <li class="flex items-start gap-3">
+                <span class="font-mono text-[11px] num pt-[3px]" style="color:var(--ink-faint)">24</span>
+                <div>
+                  <div>iF Design Award — <span style="color:var(--ink-muted)">Winner // IHPSS</span></div>
                 </div>
-                <div id="education-list" class="space-y-6">
-                    <!-- JS 渲染 -->
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="font-mono text-[11px] num pt-[3px]" style="color:var(--ink-faint)">21</span>
+                <div>
+                  <div>SG Mark (Good Design) — <span style="color:var(--ink-muted)">Platinum // Lonesome Hotel</span></div>
                 </div>
-            </div>
-
+              </li>
+              <li class="flex items-start gap-3">
+                <span class="font-mono text-[11px] num pt-[3px]" style="color:var(--ink-faint)">—</span>
+                <div>
+                  <div>Stanford Design Challenge — <span style="color:var(--ink-muted)">Global Top 8 // IHPSS</span></div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
-    </section>
 
-    <!-- Footer (Play / Action) -->
-    <footer id="contact" class="bg-valDark text-valLight py-32 relative overflow-hidden flex flex-col items-center">
-        <div class="max-w-4xl mx-auto px-6 text-center relative z-10 flex flex-col items-center w-full">
-            
-            <p class="font-valBody text-valGray text-xl tracking-widest mb-4 font-bold uppercase" data-i18n="footer.desc">
-                準備好創造些有趣的事物了嗎？
-            </p>
-            
-            <h2 class="font-valTitle text-5xl md:text-7xl font-bold mb-16 uppercase tracking-tighter" data-i18n="footer.title">
-                CREATE SOMETHING <span class="text-valMain">FUN</span>
-            </h2>
-            
-            <!-- PLAY Button Style -->
-            <a id="contact-btn" href="mailto:julieya.wei@gmail.com" class="val-btn clip-corner w-full max-w-sm h-20 flex items-center justify-center group cursor-pointer">
-                <span class="font-valTitle text-2xl font-black tracking-[0.2em] uppercase z-10 group-hover:scale-110 transition-transform" data-i18n="footer.btn">
-                    Let's Connect
-                </span>
-            </a>
+        <!-- RIGHT timeline -->
+        <div class="lg:col-span-7">
+          <div class="font-mono text-[11px] mb-6" style="color:var(--ink-faint)">TIMELINE&nbsp;/&nbsp;年表</div>
+          <ul id="timeline-list" class="divide-y divide-[color:var(--hairline-strong)] border-t border-hairline">
+            <!-- JS renders items -->
+          </ul>
 
-            <div class="mt-32 w-full flex flex-col md:flex-row justify-between items-center gap-6 border-t border-white/10 pt-8 font-valBody text-sm font-bold text-valGray tracking-widest uppercase">
-                <div>© 2026 MILLIE WEI. copy right reserved.</div>
-                <div class="flex gap-8">
-                    <a href="https://github.com/hsewiu" class="hover:text-valMain transition-colors flex items-center gap-2"><i data-lucide="github" class="w-4 h-4"></i> GitHub</a>
-                    <a href="https://www.linkedin.com/in/millie-wei" class="hover:text-valMain transition-colors flex items-center gap-2"><i data-lucide="linkedin" class="w-4 h-4"></i> LinkedIn</a>
-                </div>
+          <div class="mt-10 pt-6 border-t border-hairline grid grid-cols-2 gap-y-4 gap-x-8 text-[13px]">
+            <div class="font-mono text-[11px]" style="color:var(--ink-faint)">EDUCATION</div>
+            <div></div>
+            <div class="col-span-2">
+              <ul class="space-y-2 text-[13px]">
+                <li class="flex items-baseline gap-3"><span class="chip">Master</span><span>國立成功大學 — 工業設計學系 碩士</span></li>
+                <li class="flex items-baseline gap-3"><span class="chip">Exchange</span><span>日本九州大學 — 藝術工學部</span></li>
+                <li class="flex items-baseline gap-3"><span class="chip">Bachelor</span><span>國立臺北商業大學 — 數位多媒體設計系</span></li>
+                <li class="flex items-baseline gap-3"><span class="chip">AA</span><span>國立臺北商業大學 — 資訊管理科</span></li>
+              </ul>
             </div>
+          </div>
         </div>
-    </footer>
+      </div>
+    </div>
+  </section>
 
-    <!-- JAVASCRIPT -->
-    <script>
-        // ==========================================
-        // 1. 多國語系資料庫 (i18n Data)
-        // ==========================================
-        const i18n = {
-            zh: {
-                nav: { about: "About", experience: "Experience", work: "Works" },
-                hero: { title: "實現<div class=\"text-[36px] md:text-[90px] wave-text font-cubic text-valMain\" style=\"display: inline-block;\"><span>有</span><span>趣</span></div>的點子<span class=\"md:hidden\">，</span><br class=\"desktop-only\">讓互動產品觸手可及<span class=\"md:hidden\">。</span>", subtitle: "Creativity / Gamification / Intuition" },
-                about: { 
-                    role: "UI/UX DESIGNER/DEVELOPER", 
-                    desc: "我相信每一個工具都應該像遊戲一樣迷人且易於使用。<br>這正是我設計與實踐的核心理念。",
-                    detail:"我是一位具備 <b class=\"text-valMain underline decoration-valmain underline-offset-4\">技術邏輯與創意願景的跨領域設計師</b> 暨工程師，這份獨特的混合背景源於我從資訊管理跨足至工業設計的轉型之路。擁有 <b class=\"text-valMain underline decoration-valmain underline-offset-4\">超過三年</b> 的專業經驗，以及在日本九州大學交換期間所建立的國際視野，我擅長擔任設計師、工程師與產品經理之間的橋樑，將抽象的創意構思轉化為精確的技術需求 。對於高品質產出的堅持，讓我獲得了許多國際榮譽的肯定。我專精於策略性的視覺敘事與數位工具（Adobe creative tools、Figma），憑藉扎實的 IT 基礎，我能高效掌握 Blender、Unity、Web Front-end 等開發方式，實踐我的設計理念。", 
-                    contactBtn: "[ SYSTEM ] : RECRUIT TO PARTY?" 
-                },
-                titles: { experience: "Experience", awards: "Awards", works: "Selected Works", education: "Education" },
-                footer: { title: "CREATE SOMETHING <span class='text-valMain'>FUN</span>", desc: "準備好創造些有趣的事物了嗎？", btn: "Let's Connect" },
-                viewDetail: "View Detail",
-                
-                categories: [
-                    { id: "All", label: "ALL" },
-                    { id: "UI/UX", label: "UI/UX" },
-                    { id: "Visual", label: "視覺設計" },
-                    { id: "Programming", label: "程式開發" },
-                    { id: "Motion", label: "動態影像" },
-                    { id: "Illustration", label: "插畫" }
-                ],
-                awards: [
-                    { name: "iF Design Award 2024", subtitle: "Winner // IHPSS" },
-                    { name: "Singapore Good Design", subtitle: "Platinum Winner // LONESOME HOTEL" },
-                    { name: "Stanford Design Challenge", subtitle: "Global Top 8 // IHPSS" }
-                ],
-                experiences: [
-                    { year: "2021 - 2025", title: "Designer / Engineer", company: "aiFree Technology Services", description: "主導 IHPSS 智能復健系統的 UI/UX 設計與開發。專注於 Unity 遊戲開發與硬體整合，將枯燥的復健轉化為有趣的遊戲體驗。" },
-                    { year: "2020 - 2021", title: "Designer", company: "ToV Visual Studio", description: "專注於視覺設計、動畫製作與品牌識別專案。參與多項商業與藝術專案的視覺規劃。" },
-                    { year: "2015 - Present", title: "Freelance / Indie Dev", company: "Self-Employed", description: "長期接案，涵蓋獨立遊戲美術、程式與網頁開發。曾協助多個獨立遊戲團隊與非營利組織進行專案開發。" }
-                ],
-                education: [
-                    { tag: "Master", school: "國立成功大學 (NCKU)", major: "工業設計學系 碩士" },
-                    { tag: "Exchange", school: "日本九州大學", major: "藝術工學部 交換生" },
-                    { tag: "Bachelor", school: "國立臺北商業大學 (NTUB)", major: "數位多媒體設計系 學士" },
-                    { tag: "Associate Degree", school: "國立臺北商業大學 (NTUB)", major: "資訊管理科 副學士" }
-                ],
-                projects: [
-                    { 
-                        id: 1, 
-                        title: "智慧健促服務系統", 
-                        subtitle: "Intelligent Health Partner Service System", 
-                        category: ["UI/UX", "Programming"], 
-                        year: "2021", 
-                        desc: "智慧高齡復健促進系統。結合穿戴式智慧護膝感測器，透過遊戲化系統提升長輩復健動機，並支持數據分析與家屬追蹤。獲 2024 iF Design Award。", 
-                        tags: ["Unity", "Hardware", "LSTM", "sEMG"],
-                        cover:"img/cover/IHPSS.png",
-                        link:"https://millie-wei.notion.site/IHPSS-Remote-smart-medical-project-31a7eacfcbc0806291aecde20c327c85?source=copy_link"
-                    },
-                    { 
-                        id: 2, 
-                        title: "七音之星", 
-                        subtitle: "Music Rhythm Motion Game", 
-                        category: ["UI/UX", "Programming"], 
-                        year: "2024", 
-                        desc: "七音之星。整合 Sony Mocopi 全身動作捕捉技術的音樂節奏遊戲，讓傳統枯燥的復健動作融入音樂拍點中，提升參與感。", 
-                        tags: ["Unity", "Mocopi", "Motion Capture"],
-                        cover:"img/cover/七音之星.png",
-                        link:"https://millie-wei.notion.site/Seven-Tone-Star-Music-Rhythm-Motion-Game-31a7eacfcbc08021b0e7c9b2a135b3b4?source=copy_link"
-                    },
-                    { 
-                        id: 3, 
-                        title: "EATVIBE", 
-                        subtitle: "Smart Nutrition-Control Lunchbox", 
-                        category: ["UI/UX", "Programming"], 
-                        year: "2023", 
-                        desc: "智慧營養控制便當盒。旨在預防高齡肌少症，結合模組化硬體與 AR 辨識應用程式，輔導長輩進行精確的飲食份量管理。", 
-                        tags: ["App", "AR", "Product Design"],
-                        cover:"img/cover/EATVIBE.png",
-                        link:"https://millie-wei.notion.site/EATVIBE-Smart-Nutrition-Control-Mobile-App-and-Lunch-Box-31a7eacfcbc080969b95da7b82ed96c4?source=copy_link"
-                    },
-                    { 
-                        id: 4, 
-                        title: "蜂巢行動，飛越同溫層 婚姻平權募資專案", 
-                        subtitle: "Website Design", 
-                        category: ["UI/UX"], 
-                        year: "2019", 
-                        desc: "與婚姻平權大平台合作，為推廣其理念及募集資金而設計。希望能喚醒 700 萬人對於平權價值的重視。", 
-                        tags: ["Web/Mobile", "Crowdfunding Project"],
-                        cover:"img/cover/蜂潮行動.png",
-                        link:"https://www.behance.net/gallery/79944455/Equallove-Bee-Crowdfunding-ProjectUIUX"
-                    },
-                    { 
-                        id: 4, 
-                        title: "社民黨募資網站設計", 
-                        subtitle: "Website Design", 
-                        category: ["UI/UX"], 
-                        year: "2019", 
-                        desc: "與社民黨合作，為推廣其理念及募集資金而打造的募資平台，透過資訊整理、歸納、分類，搭配簡易的資訊圖表及視覺設計，做出不一樣的選舉新風貌。", 
-                        tags: ["Web/Mobile", "Crowdfunding Project"],
-                        cover:"https://i.meee.com.tw/QvrT96Y.gif",
-                        link:"https://www.behance.net/gallery/79837217/Social-Democratic-Party-Crowdfunding-ProjectUIUX"
-                    },
-                    { 
-                        id: 4, 
-                        title: "BacilluSense", 
-                        subtitle: "Redesign Backstage UI/UX", 
-                        category: ["UI/UX"], 
-                        year: "2021", 
-                        desc: "改造原有的藥敏後台介面，提升使用者體驗與操作效率。透過資訊架構重整與視覺優化，讓醫療人員能更快速地完成藥敏測試流程。", 
-                        tags: ["System Design", "Laboratory Software"],
-                        cover:"img/cover/Redesign Backstage of BacilluSense.png",
-                        link:"https://www.behance.net/gallery/146698677/Redesign-Backstage-of-BacilluSenseUIUX-design"
-                    },
-                    { 
-                        id: 5, 
-                        title: "X-DD", 
-                        subtitle: "Visually Impaired Children Training Game", 
-                        category: ["Programming","Motion"], 
-                        year: "2023", 
-                        desc: "發展遲緩兒童知覺訓練遊戲。透過沉浸式故事與優化介面設計，讓兒童能在無教師指導的情況下獨立完成學習任務。", 
-                        tags: ["PC/Android", "Game Dev", "Accessibility"],
-                        cover:"img/cover/X-DD.png",
-                        link:"https://hsewiu.github.io/X-DD-training-game/EN.html"
-                    },
-                    { 
-                        id: 5, 
-                        title: "霧嶼", 
-                        subtitle: "Arcade Game Experience", 
-                        category: ["UI/UX", "Programming", "Motion"], 
-                        year: "2023", 
-                        desc: "推廣馬祖文化的 2D 橫向捲軸像素冒險遊戲。結合當地民俗與歷史，以街機形式提供充滿驚喜的互動體驗。", 
-                        tags: ["Unity", "Pixel Art", "Midjourney"],
-                        cover:"img/cover/霧嶼.png",
-                        link:"https://millie-wei.notion.site/Fog-Isle-An-Arcade-Game-Experience-for-Mazu-Culture-Promotion-31a7eacfcbc08093a6a2f406aa754535?source=copy_link"
-                    },
-                    { 
-                        id: 6, 
-                        title: "擲筊與廟宇文化 科技互動藝術", 
-                        subtitle: "Interactive Art Installation", 
-                        category: ["UI/UX", "Programming", "Motion"], 
-                        year: "2024", 
-                        desc: "以廟宇「擲筊」文化為靈感的互動裝置。透過聲音辨識觸發 Unity 投影視覺，並利用 p5.js 將眾人的心願轉化為數位藝術。", 
-                        tags: ["Unity", "p5.js", "Teachable Machine"],
-                        cover:"https://file.notion.so/f/f/8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b/9db8038a-3f75-41da-82fa-e24d560de904/%E6%93%B2%E7%AD%8A%E8%88%87%E5%BB%9F%E5%AE%87%E6%96%87%E5%8C%96%EF%BD%9C%E4%BA%92%E5%8B%95%E8%97%9D%E8%A1%93%E3%80%90%E4%BA%BA%E6%A9%9F%E4%BA%92%E5%8B%95%E5%B0%88%E6%A1%88%E3%80%91.gif?table=block&id=31a7eacf-cbc0-8008-bb35-e5714845f6cd&spaceId=8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b&expirationTimestamp=1773792000000&signature=fAEMyYH3hCUmxsU6YtNPMq9LqjZl30kyg98gnXhO0R4",
-                        link:"https://millie-wei.notion.site/Divination-blocks-Interactive-Art-Installation-31a7eacfcbc0804fbfe9f0de897d71d8?source=copy_link"
-                    },
-                    { 
-                        id: 7, 
-                        title: "語音治療資料收集平台", 
-                        subtitle: "Data Collection Platform", 
-                        category: ["Programming", "UI/UX"], 
-                        year: "2021", 
-                        desc: "奇美醫院語言治療部合作專案。因應疫情開發的遠端資料收集平台，協助治療師收集兒童構音障礙數據，降低感染風險。", 
-                        tags: ["Front-End", "Web Interface", "Medical Tool"],
-                        cover:"img/cover/構音治療.png",
-                        link:"https://www.behance.net/gallery/147340259/Platform-of-Speech-TherapyUIUX-Design"
-                    },
-                    { 
-                        id: 8, 
-                        title: "2020 台北燈節 MRT 車廂彩繪", 
-                        subtitle: "限時特別列車", 
-                        category: ["Visual"], 
-                        year: "2020", 
-                        desc: "以繪本風格重新詮釋吉祥物「貓鼠大戰」，利用車廂門窗與地面打造沉浸式 3D 故事空間。", 
-                        tags: ["Illustration", "Public Art", "Exhibition Design"],
-                        cover:"img/cover/燈節車廂彩繪.png",
-                        link:"https://millie-wei.notion.site/2020-Taipei-Lantern-Festival-MRT-painted-carriages-31a7eacfcbc08004b4e5d90717e306a8?source=copy_link"
-                    },
-                    { 
-                        id: 9, 
-                        title: "調配公式", 
-                        subtitle: "聯合畢業展總設計", 
-                        category: ["Visual"], 
-                        year: "2019", 
-                        desc: "調配公式。北商大設計管理學院畢業展主視覺。將三系所特色比喻為化學元素，透過純白空間與互動球池強化視覺凝聚力。", 
-                        tags: ["Visual Identity", "Exhibition Space Design"],
-                        cover:"https://i.meee.com.tw/ZpGXoBY.gif",
-                        link:"https://millie-wei.notion.site/Mixing-Formula-NTUB-Joint-Graduation-Exhibition-3187eacfcbc080ca8099d8c7754377a8?source=copy_link"
-                    },
-                    { 
-                        id: 10, 
-                        title: "子時三刻", 
-                        subtitle: "畢業展總設計", 
-                        category: ["Visual"], 
-                        year: "2019", 
-                        desc: "子時三刻。作為畢業展子專區，以沙漏與大腦象徵動畫與遊戲設計師熬夜創作的精神與時間投入。", 
-                        tags: ["Visual Identity", "Merchandise Design"],
-                        cover:"img/cover/子時三刻.png",
-                        link:"https://millie-wei.notion.site/Third-Quarter-at-Midnight-Design-Achievements-Exhibition-31a7eacfcbc080c2894ed6e01315860b?source=copy_link"
-                    },
-                    { 
-                        id: 11, 
-                        title: "木屋遊戲館 IndieCabin", 
-                        subtitle: "Visual Identity & Event Series", 
-                        category: ["Visual"], 
-                        year: "2020", 
-                        desc: "木屋。致力於推廣台灣原創獨立遊戲的平台，負責品牌視覺識別設計、原創角色開發以及各類遊戲創作活動的視覺規畫。", 
-                        tags: ["Character Design", "Logo Design", "Illustration"],
-                        cover:"img/cover/IndieCabin.png",
-                        link:"https://millie-wei.notion.site/IndieCabin-Taiwan-Independent-Game-Creation-Platform-31a7eacfcbc0804a9f2ee8958e16676b?source=copy_link"
-                    },
-                    { 
-                        id: 12, 
-                        title: "早餐生物生存中！", 
-                        subtitle: "公仔設計", 
-                        category: ["Visual"], 
-                        year: "2022", 
-                        desc: "「早餐生物生存中！」是一個辦公室療癒計畫，由一群早餐星球來的孩子組成。負責角色設計，將日常早餐元素轉化為可愛的擬人化角色，為忙碌的上班族帶來一絲溫暖與歡樂。", 
-                        tags: ["Character Design", "3D Modeling"],
-                        cover:"img/cover/早餐生物.png",
-                        link:"https://www.behance.net/gallery/228763879/Figurine-Design"
-                    },
-                    { 
-                        id: 13, 
-                        title: "Lonesome Hotel", 
-                        subtitle: "Winter Aid Project for the Elderly", 
-                        category: ["Motion"], 
-                        year: "2020", 
-                        desc: "與弘道基金會合作的冬令募款專案。透過影片呈現獨居長輩的真實生活境況，獲 2021 新加坡 SG Mark 白金獎。", 
-                        tags: ["Video Production", "Director", "Social Welfare"],
-                        cover:"https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExeTFhNjI5Z3JoNHc4bGttNzIyeTE1eXRibDc1bDAzb2IyYWp6MHFmdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/lvtywhETAZHE4pnYqb/giphy.gif",
-                        link:"https://millie-wei.notion.site/LONESOME-HOTEL-3187eacfcbc08036a126f7f4e7969b00?source=copy_link"
-                    },
-                    { 
-                        id: 14, 
-                        title: "穆斯林友善旅遊動畫", 
-                        subtitle: "官方宣傳動畫", 
-                        category: ["Motion"], 
-                        year: "2020", 
-                        desc: "台灣清真中心宣傳動畫。採用活潑的手作剪貼簿風格，整合輕巧的敘事結構，有效提升穆斯林友善旅遊資訊的傳達率。", 
-                        tags: ["Motion Graphic", "Scrapbook Style"],
-                        cover:"https://file.notion.so/f/f/8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b/a04e62ad-92fe-4859-baa9-3fc069b08439/2020_%E8%B2%BF%E5%8D%94%E5%8B%95%E7%95%AB_%E7%A9%86%E6%96%AF%E6%9E%97%E6%8E%A8%E5%BB%A3.gif?table=block&id=31a7eacf-cbc0-8053-ac77-d36031b67297&spaceId=8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b&expirationTimestamp=1773792000000&signature=bTigQhrf5QzHUdzk3h_2A8qE9dCnd6GZ7fu1OJSLcQA",
-                        link:"https://millie-wei.notion.site/Taiwan-Halal-Integrity-Development-Association-3187eacfcbc08051b12ec5a09ecc6ae0?source=copy_link"
-                    },
-                    { 
-                        id: 15, 
-                        title: "2020 台北國際電玩展宣傳動畫", 
-                        subtitle: "Key Visual Motion Design", 
-                        category: ["Motion"], 
-                        year: "2020", 
-                        desc: "為2020國際台北電玩展設計的宣傳動畫與主視覺動態。結合快節奏與活潑的剪輯表現出電玩文化的生命力。", 
-                        tags: ["Motion Graphic", "Video Production"],
-                        cover:"https://i.meee.com.tw/D2ccdf2.gif",
-                        link:"https://millie-wei.notion.site/2020-Taipei-Game-Show-3187eacfcbc080459d8fc4fe37b926ff?source=copy_link"
-                    },
-                    { 
-                        id: 16, 
-                        title: "勇敢自信，護台同行：大型宣傳直播專案", 
-                        subtitle: "Live Stream UI & VFX Design", 
-                        category: ["Motion"], 
-                        year: "2020", 
-                        desc: "這是一系列為台灣民進黨2020年總統及立法委員聯合選舉大規模直播宣傳活動設計的直播鏡像畫面及直播特效。直播期間，同時線上人數高峰超過1000人。", 
-                        tags: ["Motion Graphic", "Live Stream UI"],
-                        cover:"https://i.meee.com.tw/qCRLvH3.gif",
-                        link:"https://millie-wei.notion.site/Brave-Confident-Protect-Taiwan-Together-3187eacfcbc08077bdeecc135cb0b6e2?source=copy_link"
-                    },
-                    { 
-                        id: 17, 
-                        title: "午後時光：光泉飲品促銷 CM", 
-                        subtitle: "7-Eleven Animation Production", 
-                        category: ["Motion"], 
-                        year: "2020", 
-                        desc: "為光泉「午後時光」所製作的7-11促銷動畫。以輕鬆愉快的氛圍呈現產品特點，成功提升品牌形象與促銷效果。", 
-                        tags: ["Motion Graphic", "Live Stream UI"],
-                        cover:"https://file.notion.so/f/f/8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b/1dd7c072-5c61-4dba-a63e-69f5b706182a/%E3%80%90%E5%8D%88%E5%BE%8C%E6%99%82%E5%85%89%EF%BC%8D%E5%85%89%E6%B3%89%E9%A3%B2%E5%93%81%E4%BF%83%E9%8A%B7CM%E3%80%91%E5%85%89%E6%B3%89%E9%87%8D%E4%B9%B3%E6%8A%B9%E8%8C%B6%E6%8B%BF%E9%90%B5.gif?table=block&id=31a7eacf-cbc0-8077-bd45-c6595bdb4239&spaceId=8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b&expirationTimestamp=1773792000000&signature=iBwFXUEu8vgzdMiLRM5ImC9uK5oEGZhGXpSJw2-sF7E",
-                        link:"https://millie-wei.notion.site/Afternoon-Tea-Kuang-Chuan-Drinks-Promotional-CM-3187eacfcbc080e6967ee1a81de8e959?source=copy_link"
-                    },
-                    { 
-                        id: 18, 
-                        title: "原來化療副作用可以這樣共處", 
-                        subtitle: "TBCA 衛教動畫", 
-                        category: ["Motion"], 
-                        year: "2021", 
-                        desc: "為健談及中華民國乳癌教育暨防治協會所製作的衛教動畫。以清晰易懂與柔軟的視覺語言，幫助患者理解化療副作用並提供實用的應對策略。", 
-                        tags: ["Motion Graphic", "Video Production"],
-                        cover:"https://file.notion.so/f/f/8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b/c24684f5-00c2-48ff-aa5a-7f9044f44f64/2021_%E5%81%A5%E8%AB%87_%E8%88%87%E5%8C%96%E7%99%82%E5%85%B1%E8%99%95.gif?table=block&id=31a7eacf-cbc0-8079-8afa-f0d69d66eb73&spaceId=8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b&expirationTimestamp=1773792000000&signature=47S3XhkGbDp4r3LD0JuCzmo21tGc-tY14yhXakw2RWg",
-                        link:"https://millie-wei.notion.site/Living-with-Chemotherapy-Side-Effects-3187eacfcbc080c6b27ec191a0aa8f40?source=copy_link"
-                    },
-                    { 
-                        id: 19, 
-                        title: "慢性腎臟病你該知道的事情", 
-                        subtitle: "三軍總醫院臨床藥學部 衛教動畫", 
-                        category: ["Motion"], 
-                        year: "2021", 
-                        desc: "台灣約有200多萬人罹患腎臟相關疾病。本影片由三軍總醫院臨床藥學部委託製作，旨在提高公眾對慢性腎臟病的認識。透過清晰的視覺敘事與實用資訊，幫助患者及其家屬更好地理解疾病管理與預防措施。", 
-                        tags: ["Motion Graphic", "Video Production"],
-                        cover:"https://file.notion.so/f/f/8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b/5a3c1f28-2475-4cc2-9015-e8b757c7d6e9/2021_%E5%81%A5%E8%AB%87_%E8%85%8E%E8%87%9F%E7%97%85.gif?table=block&id=31a7eacf-cbc0-8001-bcee-fa0003c3b659&spaceId=8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b&expirationTimestamp=1773792000000&signature=l1tDV88G9sgGzDpmFRzfwr3_XGhxP6IGe7Rz1G2weVM",
-                        link:"https://millie-wei.notion.site/Things-You-Should-Know-About-Chronic-Kidney-Disease-3187eacfcbc0804f9f42ed035534d801?source=copy_link"
-                    },
-                    { 
-                        id: 20, 
-                        title: "生，在枯萎之後", 
-                        subtitle: "2D Animation", 
-                        category: ["Motion"], 
-                        year: "2019", 
-                        desc: "入圍 2019 巴哈姆特 ACG 創作大賽決選。手繪 2D 動畫，探討校園霸凌、自省與自我價值肯定。", 
-                        tags: ["2D Animation", "Character Design", "Storyboarding"],
-                        cover:"https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbjB2ejRzN3BiZ2FtMzVtbHB3Z2g4eGpwZjdidGRhNTNmamZobXc1MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/aWYZum6HcYXb7qZPca/giphy.gif",
-                        link:"https://millie-wei.notion.site/Life-After-Witherin-3187eacfcbc080e1b78bd2f4631a4445?source=copy_link"
-                    },
-                    { 
-                        id: 21, 
-                        title: "Freelance Illustration", 
-                        subtitle: "Commission Works", 
-                        category: ["Illustration"], 
-                        year: "2020", 
-                        desc: "承接多樣的插畫委託專案，涵蓋遊戲角色、Youtuber橫幅與風格頭像等等。每個專案都以強烈的視覺風格和創意概念為基礎，滿足客戶的需求並展現我的藝術多樣性。", 
-                        tags: ["illustration"],
-                        cover:"img/cover/commision.jpg",
-                        link:"https://millie-wei.notion.site/Freelance-Illustration-31a7eacfcbc080a093c6cf33a8adb2e2?source=copy_link"
-                    },
-                    { 
-                        id: 22, 
-                        title: "OC / Fan Creation", 
-                        subtitle: "Personal Creation", 
-                        category: ["Illustration"], 
-                        year: "2020", 
-                        desc: "個人自發性的原創角色創作與粉絲創作。", 
-                        tags: ["illustration"],
-                        cover:"img/cover/個人創作.png",
-                        link:"https://millie-wei.notion.site/OC-Fan-Creation-3217eacfcbc0800792fff20cd838afc4?source=copy_link"
-                    }
-                ]
-            },
-            en: {
-                nav: { about: "About", experience: "Experience", work: "Works" },
-                hero: { title: "Turning <div class=\"text-[36px] md:text-[90px] wave-text font-cubic text-valMain\" style=\"display: inline-block;\"><span>p</span><span>l</span><span>a</span><span>y</span><span>f</span><span>u</span><span>l</span></div>ideas<br>into tangible products.", subtitle: "Creativity / Gamification / Intuition" },
-                about: { 
-                    role: "UI/UX DESIGNER/DEVELOPER", 
-                    desc: "I believe every tool should be as engaging and easy<br>to use as a game. This is my core philosophy.", 
-                    detail:"I am a <b class=\"text-valMain underline decoration-valmain underline-offset-4 \">multidisciplinary designer and engineer</b> with a rare blend of technical logic and creative vision, shaped by my transition from Information Management to Industrial Design. With <b class=\"text-valMain underline decoration-valmain underline-offset-4\">over 3 years</b> of professional experience and a global perspective from my exchange at Kyushu University, I excel at bridging the gap between designers, engineers, and PMs to translate abstract concepts into precise technical requirements. My commitment to excellence has earned prestigious international recognition. I specialize in strategic visual storytelling and rapid tool adoption; leveraging my IT foundation to master Adobe creative tools, Figma, Blender, Unity, and Web Front-end development to bring my design philosophy to life.", 
-                    contactBtn: "[ SYSTEM ] : RECRUIT TO PARTY?" 
-                },
-                titles: { experience: "Experience", awards: "Awards", works: "Selected Works", education: "Education" },
-                footer: { title: "CREATE SOMETHING <span class='text-valMain'>FUN</span>", desc: "READY TO CREATE SOMETHING FUN?", btn: "Let's Connect" },
-                viewDetail: "View Detail",
-                
-                categories: [
-                    { id: "All", label: "ALL" }, { id: "UI/UX", label: "UI/UX" }, { id: "Programming", label: "DEV" }, { id: "Visual", label: "VISUAL" }, { id: "Motion", label: "MOTION" },
-                    { id: "Illustration", label: "Illust" }
-                ],
-                awards: [
-                    { name: "iF Design Award 2024", subtitle: "Winner // IHPSS" },
-                    { name: "Singapore Good Design", subtitle: "Platinum Winner // LONESOME HOTEL" },
-                    { name: "Stanford Design Challenge", subtitle: "Global Top 8 // IHPSS" }
-                ],
-                experiences: [
-                    { year: "2021 - 2025", title: "Designer / Engineer", company: "aiFree Technology Services", description: "Led UI/UX design & dev for IHPSS smart rehab system. Gamified rehab processes using Unity & Bluetooth sensors." },
-                    { year: "2020 - 2021", title: "Designer", company: "ToV Visual Studio", description: "Focused on visual design, animation, and brand identity." },
-                    { year: "2015 - Present", title: "Freelance / Indie Dev", company: "Self-Employed", description: "Indie game art, programming, illustration, and web dev." }
-                ],
-                education: [
-                    { tag: "Master", school: "National Cheng Kung Univ.", major: "Industrial Design" },
-                    { tag: "Exchange", school: "Kyushu University, Japan", major: "School of Design" },
-                    { tag: "Bachelor", school: "National Taipei Univ. of Business", major: "Digital Multimedia Design" },
-                    { tag: "Associate Degree", school: "National Taipei Univ. of Business", major: "Information Management" }
-                ],
-                projects: [
-                    { 
-                        id: 1, 
-                        title: "IHPSS", 
-                        subtitle: "Intelligent Health Partner Service System", 
-                        category: ["UI/UX", "Programming"], 
-                        year: "2021", 
-                        desc: "A smart healthcare promotion system for the elderly. Combines wearable knee sensors with gamification to boost rehab motivation and supports data analysis for family tracking. Winner of the 2024 iF Design Award.", 
-                        tags: ["Unity", "Hardware", "LSTM", "sEMG"],
-                        cover:"img/cover/IHPSS.png",
-                        link:"https://millie-wei.notion.site/IHPSS-Remote-smart-medical-project-31a7eacfcbc0806291aecde20c327c85?source=copy_link"
-                    },
-                    { 
-                        id: 2, 
-                        title: "Seven-Tone Star", 
-                        subtitle: "Music Rhythm Motion Game", 
-                        category: ["UI/UX", "Programming"], 
-                        year: "2024", 
-                        desc: "Seven-Tone Star. A rhythm game integrated with Sony Mocopi motion capture technology, turning repetitive rehab exercises into rhythmic actions to enhance engagement.", 
-                        tags: ["Unity", "Mocopi", "Motion Capture"],
-                        cover:"img/cover/七音之星.png",
-                        link:"https://millie-wei.notion.site/Seven-Tone-Star-Music-Rhythm-Motion-Game-31a7eacfcbc08021b0e7c9b2a135b3b4?source=copy_link"
-                    },
-                    { 
-                        id: 3, 
-                        title: "EATVIBE", 
-                        subtitle: "Smart Nutrition-Control Lunchbox", 
-                        category: ["UI/UX", "Programming"], 
-                        year: "2023", 
-                        desc: "A smart nutrition-control lunchbox designed to prevent sarcopenia in the elderly. Combines modular hardware with an AR app to guide users in precise portion management.", 
-                        tags: ["App", "AR", "Product Design"],
-                        cover:"img/cover/EATVIBE.png",
-                        link:"https://millie-wei.notion.site/EATVIBE-Smart-Nutrition-Control-Mobile-App-and-Lunch-Box-31a7eacfcbc080969b95da7b82ed96c4?source=copy_link"
-                    },
-                    { 
-                        id: 4, 
-                        title: "Equallove Bee Crowdfunding Project", 
-                        subtitle: "Website Design", 
-                        category: ["UI/UX"], 
-                        year: "2019", 
-                        desc: "Collaboration with the Marriage Equality Coalition Taiwan. Designed to promote equality values and raise funds, aiming to engage 7 million people in the importance of equality.", 
-                        tags: ["Web/Mobile", "Crowdfunding Project"],
-                        cover:"img/cover/蜂潮行動.png",
-                        link:"https://www.behance.net/gallery/79944455/Equallove-Bee-Crowdfunding-ProjectUIUX"
-                    },
-                    { 
-                        id: 4, 
-                        title: "Social Democratic Party Crowdfunding Project", 
-                        subtitle: "Website Design", 
-                        category: ["UI/UX"], 
-                        year: "2019", 
-                        desc: "A crowdfunding platform developed for the Social Democratic Party. Features optimized information architecture and visual design to create a fresh look for political campaigning.", 
-                        tags: ["Web/Mobile", "Crowdfunding Project"],
-                        cover:"https://i.meee.com.tw/QvrT96Y.gif",
-                        link:"https://www.behance.net/gallery/79837217/Social-Democratic-Party-Crowdfunding-ProjectUIUX"
-                    },
-                    { 
-                        id: 4, 
-                        title: "BacilluSense", 
-                        subtitle: "Redesign Backstage UI/UX", 
-                        category: ["UI/UX"], 
-                        year: "2021", 
-                        desc: "Redesign of a susceptibility testing backstage interface to improve UX and efficiency. Optimized through information restructuring to help medical staff complete testing workflows faster.", 
-                        tags: ["System Design", "Laboratory Software"],
-                        cover:"img/cover/Redesign Backstage of BacilluSense.png",
-                        link:"https://www.behance.net/gallery/146698677/Redesign-Backstage-of-BacilluSenseUIUX-design"
-                    },
-                    { 
-                        id: 5, 
-                        title: "X-DD", 
-                        subtitle: "Visually Impaired Children Training Game", 
-                        category: ["Programming","Motion"], 
-                        year: "2023", 
-                        desc: "A perceptual training game for children with developmental delays. Uses immersive storytelling and optimized UI to allow children to complete learning tasks independently.", 
-                        tags: ["PC/Android", "Game Dev", "Accessibility"],
-                        cover:"img/cover/X-DD.png",
-                        link:"https://hsewiu.github.io/X-DD-training-game/EN.html"
-                    },
-                    { 
-                        id: 5, 
-                        title: "Fog Isle", 
-                        subtitle: "Arcade Game Experience", 
-                        category: ["UI/UX", "Programming", "Motion"], 
-                        year: "2023", 
-                        desc: "A 2D side-scrolling pixel adventure game promoting Mazu culture. Combines local folklore and history in an arcade format for an interactive experience full of surprises.", 
-                        tags: ["Unity", "Pixel Art", "Midjourney"],
-                        cover:"img/cover/霧嶼.png",
-                        link:"https://millie-wei.notion.site/Fog-Isle-An-Arcade-Game-Experience-for-Mazu-Culture-Promotion-31a7eacfcbc08093a6a2f406aa754535?source=copy_link"
-                    },
-                    { 
-                        id: 6, 
-                        title: "Divination Interaction", 
-                        subtitle: "Interactive Art Installation", 
-                        category: ["UI/UX", "Programming", "Motion"], 
-                        year: "2024", 
-                        desc: "An interactive installation inspired by the temple ritual 'Bwa Bwei.' Triggers Unity projections through voice recognition and uses p5.js to transform wishes into digital art.", 
-                        tags: ["Unity", "p5.js", "Teachable Machine"],
-                        cover:"https://file.notion.so/f/f/8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b/9db8038a-3f75-41da-82fa-e24d560de904/%E6%93%B2%E7%AD%8A%E8%88%87%E5%BB%9F%E5%AE%87%E6%96%87%E5%8C%96%EF%BD%9C%E4%BA%92%E5%8B%95%E8%97%9D%E8%A1%93%E3%80%90%E4%BA%BA%E6%A9%9F%E4%BA%92%E5%8B%95%E5%B0%88%E6%A1%88%E3%80%91.gif?table=block&id=31a7eacf-cbc0-8008-bb35-e5714845f6cd&spaceId=8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b&expirationTimestamp=1773792000000&signature=fAEMyYH3hCUmxsU6YtNPMq9LqjZl30kyg98gnXhO0R4",
-                        link:"https://millie-wei.notion.site/Divination-blocks-Interactive-Art-Installation-31a7eacfcbc0804fbfe9f0de897d71d8?source=copy_link"
-                    },
-                    { 
-                        id: 7, 
-                        title: "Speech Therapy Platform", 
-                        subtitle: "Data Collection Platform", 
-                        category: ["Programming", "UI/UX"], 
-                        year: "2021", 
-                        desc: "Collaboration with Chi-Mei Hospital. A remote data collection platform developed during the pandemic to help therapists collect articulation data while reducing infection risks.", 
-                        tags: ["Front-End", "Web Interface", "Medical Tool"],
-                        cover:"img/cover/構音治療.png",
-                        link:"https://www.behance.net/gallery/147340259/Platform-of-Speech-TherapyUIUX-Design"
-                    },
-                    { 
-                        id: 8, 
-                        title: "2020 Taipei Lantern Festival MRT painted carriages", 
-                        subtitle: "Limited-Time Special Train", 
-                        category: ["Visual"], 
-                        year: "2020", 
-                        desc: "Reinterpreting the 'Cat and Mouse' mascots in a picture-book style, using carriage doors and floors to create an immersive 3D storybook space.", 
-                        tags: ["Illustration", "Public Art", "Exhibition Design"],
-                        cover:"img/cover/燈節車廂彩繪.png",
-                        link:"https://millie-wei.notion.site/2020-Taipei-Lantern-Festival-MRT-painted-carriages-31a7eacfcbc08004b4e5d90717e306a8?source=copy_link"
-                    },
-                    { 
-                        id: 9, 
-                        title: "Mixing Formula", 
-                        subtitle: "Joint Graduation Exhibition", 
-                        category: ["Visual"], 
-                        year: "2019", 
-                        desc: "Key visual for the NTUB Joint Graduation Exhibition. Represents three departments as chemical elements, using a white space and an interactive ball pit to strengthen visual cohesion.", 
-                        tags: ["Visual Identity", "Exhibition Space Design"],
-                        cover:"https://i.meee.com.tw/ZpGXoBY.gif",
-                        link:"https://millie-wei.notion.site/Mixing-Formula-NTUB-Joint-Graduation-Exhibition-3187eacfcbc080ca8099d8c7754377a8?source=copy_link"
-                    },
-                    { 
-                        id: 10, 
-                        title: "Third Quarter at Midnight", 
-                        subtitle: "Thematic Sub-Exhibition", 
-                        category: ["Visual"], 
-                        year: "2019", 
-                        desc: "A thematic sub-exhibition zone. Uses an hourglass and brain to symbolize the spirit and time poured into late-night creations by animation and game designers.", 
-                        tags: ["Visual Identity", "Merchandise Design"],
-                        cover:"img/cover/子時三刻.png",
-                        link:"https://millie-wei.notion.site/Third-Quarter-at-Midnight-Design-Achievements-Exhibition-31a7eacfcbc080c2894ed6e01315860b?source=copy_link"
-                    },
-                    { 
-                        id: 11, 
-                        title: "IndieCabin", 
-                        subtitle: "Visual Identity & Event Series", 
-                        category: ["Visual"], 
-                        year: "2020", 
-                        desc: "A platform promoting original indie games from Taiwan. Responsible for brand identity, character development, and visual planning for various creative events.", 
-                        tags: ["Character Design", "Logo Design", "Illustration"],
-                        cover:"img/cover/IndieCabin.png",
-                        link:"https://millie-wei.notion.site/IndieCabin-Taiwan-Independent-Game-Creation-Platform-31a7eacfcbc0804a9f2ee8958e16676b?source=copy_link"
-                    },
-                    { 
-                        id: 12, 
-                        title: "Asagohan SeiButsu", 
-                        subtitle: "Figurine Design", 
-                        category: ["Visual"], 
-                        year: "2022", 
-                        desc: "'Breakfast Creatures Surviving!' is an office healing project. Responsible for character design, turning daily breakfast items into cute anthropomorphic figures to bring warmth to workers.", 
-                        tags: ["Character Design", "3D Modeling"],
-                        cover:"img/cover/早餐生物.png",
-                        link:"https://www.behance.net/gallery/228763879/Figurine-Design"
-                    },
-                    { 
-                        id: 13, 
-                        title: "Lonesome Hotel", 
-                        subtitle: "Winter Aid Project for the Elderly", 
-                        category: ["Motion"], 
-                        year: "2020", 
-                        desc: "A winter fundraising project with the Hondao Foundation. Uses video to depict the lives of isolated elderly people, winning the 2021 Singapore SG Mark Platinum Award.", 
-                        tags: ["Video Production", "Director", "Social Welfare"],
-                        cover:"https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExeTFhNjI5Z3JoNHc4bGttNzIyeTE1eXRibDc1bDAzb2IyYWp6MHFmdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/lvtywhETAZHE4pnYqb/giphy.gif",
-                        link:"https://millie-wei.notion.site/LONESOME-HOTEL-3187eacfcbc08036a126f7f4e7969b00?source=copy_link"
-                    },
-                    { 
-                        id: 14, 
-                        title: "Muslim Tourism Animation", 
-                        subtitle: "Promotional Animation", 
-                        category: ["Motion"], 
-                        year: "2020", 
-                        desc: "Promotional animation for the Taiwan Halal Center. Uses a lively scrapbook style and light narrative to effectively deliver Muslim-friendly tourism information.", 
-                        tags: ["Motion Graphic", "Scrapbook Style"],
-                        cover:"https://file.notion.so/f/f/8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b/a04e62ad-92fe-4859-baa9-3fc069b08439/2020_%E8%B2%BF%E5%8D%94%E5%8B%95%E7%95%AB_%E7%A9%86%E6%96%AF%E6%9E%97%E6%8E%A8%E5%BB%A3.gif?table=block&id=31a7eacf-cbc0-8053-ac77-d36031b67297&spaceId=8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b&expirationTimestamp=1773792000000&signature=bTigQhrf5QzHUdzk3h_2A8qE9dCnd6GZ7fu1OJSLcQA",
-                        link:"https://millie-wei.notion.site/Taiwan-Halal-Integrity-Development-Association-3187eacfcbc08051b12ec5a09ecc6ae0?source=copy_link"
-                    },
-                    { 
-                        id: 15, 
-                        title: "2020 Taipei Game Show", 
-                        subtitle: "Key Visual Motion Design", 
-                        category: ["Motion"], 
-                        year: "2020", 
-                        desc: "Promotional animation and motion design for the 2020 Taipei Game Show. Uses fast-paced editing to capture the vitality of gaming culture.", 
-                        tags: ["Motion Graphic", "Video Production"],
-                        cover:"https://i.meee.com.tw/D2ccdf2.gif",
-                        link:"https://millie-wei.notion.site/2020-Taipei-Game-Show-3187eacfcbc080459d8fc4fe37b926ff?source=copy_link"
-                    },
-                    { 
-                        id: 16, 
-                        title: "Brave & Confident: Protect Taiwan Together", 
-                        subtitle: "Live Stream UI & VFX Design", 
-                        category: ["Motion"], 
-                        year: "2020", 
-                        desc: "Live stream UI and VFX design for the 2020 election campaign. The campaign event saw peak concurrent viewership exceeding 1,000 people.", 
-                        tags: ["Motion Graphic", "Live Stream UI"],
-                        cover:"https://i.meee.com.tw/qCRLvH3.gif",
-                        link:"https://millie-wei.notion.site/Brave-Confident-Protect-Taiwan-Together-3187eacfcbc08077bdeecc135cb0b6e2?source=copy_link"
-                    },
-                    { 
-                        id: 17, 
-                        title: "Tea Time: Kuang Chuan CM", 
-                        subtitle: "7-Eleven Animation Production", 
-                        category: ["Motion"], 
-                        year: "2020", 
-                        desc: "A 7-Eleven promotional animation for Kuang Chuan’s 'Afternoon Tea.' Successfully boosted brand image and sales with a lighthearted atmosphere.", 
-                        tags: ["Motion Graphic", "Live Stream UI"],
-                        cover:"https://file.notion.so/f/f/8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b/1dd7c072-5c61-4dba-a63e-69f5b706182a/%E3%80%90%E5%8D%88%E5%BE%8C%E6%99%82%E5%85%89%EF%BC%8D%E5%85%89%E6%B3%89%E9%A3%B2%E5%93%81%E4%BF%83%E9%8A%B7CM%E3%80%91%E5%85%89%E6%B3%89%E9%87%8D%E4%B9%B3%E6%8A%B9%E8%8C%B6%E6%8B%BF%E9%90%B5.gif?table=block&id=31a7eacf-cbc0-8077-bd45-c6595bdb4239&spaceId=8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b&expirationTimestamp=1773792000000&signature=iBwFXUEu8vgzdMiLRM5ImC9uK5oEGZhGXpSJw2-sF7E",
-                        link:"https://millie-wei.notion.site/Afternoon-Tea-Kuang-Chuan-Drinks-Promotional-CM-3187eacfcbc080e6967ee1a81de8e959?source=copy_link"
-                    },
-                    { 
-                        id: 18, 
-                        title: "Living with Chemotherapy Side Effects", 
-                        subtitle: "TBCA Educational Animation", 
-                        category: ["Motion"], 
-                        year: "2021", 
-                        desc: "Educational animation for TBCA. Uses soft visual language to help patients understand chemotherapy side effects and provide practical coping strategies.", 
-                        tags: ["Motion Graphic", "Video Production"],
-                        cover:"https://file.notion.so/f/f/8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b/c24684f5-00c2-48ff-aa5a-7f9044f44f64/2021_%E5%81%A5%E8%AB%87_%E8%88%87%E5%8C%96%E7%99%82%E5%85%B1%E8%99%95.gif?table=block&id=31a7eacf-cbc0-8079-8afa-f0d69d66eb73&spaceId=8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b&expirationTimestamp=1773792000000&signature=47S3XhkGbDp4r3LD0JuCzmo21tGc-tY14yhXakw2RWg",
-                        link:"https://millie-wei.notion.site/Living-with-Chemotherapy-Side-Effects-3187eacfcbc080c6b27ec191a0aa8f40?source=copy_link"
-                    },
-                    { 
-                        id: 19, 
-                        title: "Things About Chronic Kidney Disease", 
-                        subtitle: "Educational Animation", 
-                        category: ["Motion"], 
-                        year: "2021", 
-                        desc: "Educational animation for kidney disease awareness. Uses clear visual storytelling to help over 2 million patients in Taiwan understand disease management and prevention.", 
-                        tags: ["Motion Graphic", "Video Production"],
-                        cover:"https://file.notion.so/f/f/8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b/5a3c1f28-2475-4cc2-9015-e8b757c7d6e9/2021_%E5%81%A5%E8%AB%87_%E8%85%8E%E8%87%9F%E7%97%85.gif?table=block&id=31a7eacf-cbc0-8001-bcee-fa0003c3b659&spaceId=8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b&expirationTimestamp=1773792000000&signature=l1tDV88G9sgGzDpmFRzfwr3_XGhxP6IGe7Rz1G2weVM",
-                        link:"https://millie-wei.notion.site/Things-You-Should-Know-About-Chronic-Kidney-Disease-3187eacfcbc0804f9f42ed035534d801?source=copy_link"
-                    },
-                    { 
-                        id: 20, 
-                        title: "Life, After Withering", 
-                        subtitle: "2D Animation", 
-                        category: ["Motion"], 
-                        year: "2019", 
-                        desc: "Finalist of the 2019 Bahamut ACG Creation Contest. A 2D animation exploring campus bullying, self-reflection, and self-worth affirmation.", 
-                        tags: ["2D Animation", "Character Design", "Storyboarding"],
-                        cover:"https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbjB2ejRzN3BiZ2FtMzVtbHB3Z2g4eGpwZjdidGRhNTNmamZobXc1MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/aWYZum6HcYXb7qZPca/giphy.gif",
-                        link:"https://millie-wei.notion.site/Life-After-Witherin-3187eacfcbc080e1b78bd2f4631a4445?source=copy_link"
-                    },
-                    { 
-                        id: 21, 
-                        title: "Freelance Illustration", 
-                        subtitle: "Commission Works", 
-                        category: ["Illustration"], 
-                        year: "2020", 
-                        desc: "I take on a wide variety of illustration commissions, including game characters, YouTuber banners, and themed avatars. Each project is based on a strong visual style and creative concept, meeting the client's needs.", 
-                        tags: ["illustration"],
-                        cover:"img/cover/commision.jpg",
-                        link:"https://millie-wei.notion.site/Freelance-Illustration-31a7eacfcbc080a093c6cf33a8adb2e2?source=copy_link"
-                    },
-                    { 
-                        id: 22, 
-                        title: "OC / Fan Creation", 
-                        subtitle: "Personal Creation", 
-                        category: ["Illustration"], 
-                        year: "2020", 
-                        desc: "Original character creations by individuals and fan creations.", 
-                        tags: ["illustration"],
-                        cover:"img/cover/個人創作.png",
-                        link:"https://millie-wei.notion.site/OC-Fan-Creation-3217eacfcbc0800792fff20cd838afc4?source=copy_link"
-                    }
-                ]
-            },
-            ja: {
-                nav: { about: "About", experience: "Experience", work: "Works" },
-                hero: { title: "<div class=\"text-[36px] md:text-[90px] wave-text font-cubic text-valMain\" style=\"display: inline-block;\"><span>面</span><span>白</span><span>い</span></div>アイデアを、<br class=\"desktop-only\">実用的なプロダクトへ。", subtitle: "Creativity / Gamification / Intuition" },
-                about: { 
-                    role: "UI/UX DESIGNER/DEVELOPER", 
-                    desc: "すべてのツールはゲームのように魅力的で使いやすい<br>べきだと信じています。これが私の哲学です。", 
-                    detail: "私は、情報管理から工業デザインへと専門性を広げ、<b class=\"text-valMain underline decoration-valmain underline-offset-4\">技術的ロジックとクリエイティブなビジョンを兼ね備えたマルチディシプリナリー・デザイナー</b> 兼エンジニアです 。<b class=\"text-valMain underline decoration-valmain underline-offset-4\">3年以上の実務経験</b> に加え、九州大学での交換留学を通じて培ったグローバルな視点を持ち、デザイナー、エンジニア、PMの間に立つ「架け橋」として、抽象的なコンセプトを精密な技術要件へと落とし込むことを得意としています 。妥協のない品質への追求は、数多くの国際的な賞でも高く評価されています 。ITのバックグラウンドを活かし、Adobe creative tools、Figma、Blender、Unity、Webフロントエンド開発などの最新ツールを自在に操ることで、私のデザイン哲学を具現化し続けています 。", 
-                    contactBtn: "[ SYSTEM ] : RECRUIT TO PARTY?" 
-                },
-                titles: { experience: "Experience", awards: "Awards", works: "Selected Works", education: "Education" },
-                footer: { title: "CREATE SOMETHING <span class='text-valMain'>FUN</span>", desc: "一緒に楽しいものを作りませんか？", btn: "Let's Connect" },
-                viewDetail: "View Detail",
-                
-                categories: [
-                    { id: "All", label: "ALL" }, { id: "UI/UX", label: "UI/UX" }, { id: "Programming", label: "DEV" }, { id: "Visual", label: "VISUAL" }, { id: "Motion", label: "MOTION" },
-                    { id: "Illustration", label: "ILLUST" }
-                ],
-                awards: [
-                    { name: "iF Design Award 2024", subtitle: "Winner // IHPSS" },
-                    { name: "Singapore Good Design", subtitle: "Platinum Winner // LONESOME HOTEL" },
-                    { name: "Stanford Design Challenge", subtitle: "Global Top 8 // IHPSS" }
-                ],
-                experiences: [
-                    { year: "2021 - 2025", title: "デザイナー / エンジニア", company: "aiFree Technology Services", description: "スマートリハビリシステム (IHPSS) のUI/UX設計と開発。Unityとハードウェアを統合し、リハビリをゲーム化。" },
-                    { year: "2020 - 2021", title: "デザイナー", company: "ToV Visual Studio", description: "ビジュアルデザイン、アニメーション制作、ブランドアイデンティティに注力。" },
-                    { year: "2015 - Present", title: "フリーランス / インディー", company: "自営業", description: "インディーゲームの美術、プログラミング、イラスト、Web開発。" }
-                ],
-                education: [
-                    { tag: "Master", school: "国立成功大学 (NCKU)", major: "工業デザイン学科 修士" },
-                    { tag: "Exchange", school: "九州大学", major: "芸術工学部 交換留学" },
-                    { tag: "Bachelor", school: "国立台北商業大学", major: "デジタルマルチメディア 学士" },
-                    { tag: "Associate Degree", school: "国立台北商業大学", major: "情報管理 準学士" }
-                ],
-                projects: [
-                    { 
-                        id: 1, 
-                        title: "スマートヘルス促進サービスシステム", 
-                        subtitle: "知能型ヘルスパートナーサービスシステム", 
-                        category: ["UI/UX", "Programming"], 
-                        year: "2021", 
-                        desc: "高齢者向けのスマートリハビリ促進システム。ウェアラブル膝サポーターセンサーを組み合わせ、ゲーム化を通じてリハビリの動機を高め、データ分析をサポート。2024年iFデザインアワード受賞。", 
-                        tags: ["Unity", "Hardware", "LSTM", "sEMG"],
-                        cover:"img/cover/IHPSS.png",
-                        link:"https://millie-wei.notion.site/IHPSS-Remote-smart-medical-project-31a7eacfcbc0806291aecde20c327c85?source=copy_link"
-                    },
-                    { 
-                        id: 2, 
-                        title: "七音の星", 
-                        subtitle: "音楽リズム・モーションゲーム", 
-                        category: ["UI/UX", "Programming"], 
-                        year: "2024", 
-                        desc: "七音の星。Sony Mocopiの全身モーションキャプチャ技術を統合したリズムゲーム。退屈なリハビリ動作を音楽のビートに融合させ、参加意欲を向上させる。", 
-                        tags: ["Unity", "Mocopi", "Motion Capture"],
-                        cover:"img/cover/七音之星.png",
-                        link:"https://millie-wei.notion.site/Seven-Tone-Star-Music-Rhythm-Motion-Game-31a7eacfcbc08021b0e7c9b2a135b3b4?source=copy_link"
-                    },
-                    { 
-                        id: 3, 
-                        title: "EATVIBE", 
-                        subtitle: "スマート栄養管理弁当箱", 
-                        category: ["UI/UX", "Programming"], 
-                        year: "2023", 
-                        desc: "高齢者のサルコペニア予防を目的としたスマート栄養管理弁当箱。ハードウェアとARアプリを組み合わせ、正確な食事量管理をサポートする。", 
-                        tags: ["App", "AR", "Product Design"],
-                        cover:"img/cover/EATVIBE.png",
-                        link:"https://millie-wei.notion.site/EATVIBE-Smart-Nutrition-Control-Mobile-App-and-Lunch-Box-31a7eacfcbc080969b95da7b82ed96c4?source=copy_link"
-                    },
-                    { 
-                        id: 4, 
-                        title: "「蜂の巣行動」同性婚平等のためのクラウドファンディング", 
-                        subtitle: "ウェブサイトデザイン", 
-                        category: ["UI/UX"], 
-                        year: "2019", 
-                        desc: "Marriage Equality Coalition Taiwan（婚姻平權大平台）とのコラボレーション。平等の価値を広め、資金を調達するために設計されたプロジェクト。", 
-                        tags: ["Web/Mobile", "Crowdfunding Project"],
-                        cover:"img/cover/蜂潮行動.png",
-                        link:"https://www.behance.net/gallery/79944455/Equallove-Bee-Crowdfunding-ProjectUIUX"
-                    },
-                    { 
-                        id: 4, 
-                        title: "社会民主党クラウドファンディングサイト", 
-                        subtitle: "ウェブサイトデザイン", 
-                        category: ["UI/UX"], 
-                        year: "2019", 
-                        desc: "社会民主党（社民党）向けのクラウドファンディングプラットフォーム。情報の整理と視覚化により、新しいスタイルの選挙キャンペーンを提案。", 
-                        tags: ["Web/Mobile", "Crowdfunding Project"],
-                        cover:"https://i.meee.com.tw/QvrT96Y.gif",
-                        link:"https://www.behance.net/gallery/79837217/Social-Democratic-Party-Crowdfunding-ProjectUIUX"
-                    },
-                    { 
-                        id: 4, 
-                        title: "BacilluSense", 
-                        subtitle: "バックエンド UI/UX リデザイン", 
-                        category: ["UI/UX"], 
-                        year: "2021", 
-                        desc: "薬剤感受性試験システムのバックエンドUIを刷新。情報アーキテクチャの再構築により、医療スタッフの作業効率と精度を向上させた。", 
-                        tags: ["System Design", "Laboratory Software"],
-                        cover:"img/cover/Redesign Backstage of BacilluSense.png",
-                        link:"https://www.behance.net/gallery/146698677/Redesign-Backstage-of-BacilluSenseUIUX-design"
-                    },
-                    { 
-                        id: 5, 
-                        title: "X-DD", 
-                        subtitle: "発達遅滞児向け知覚トレーニングゲーム", 
-                        category: ["Programming","Motion"], 
-                        year: "2023", 
-                        desc: "発達遅滞児向けの知覚トレーニングゲーム。没入型ストーリーと最適化されたUIにより、子供が自立して学習タスクを完了できる。", 
-                        tags: ["PC/Android", "Game Dev", "Accessibility"],
-                        cover:"img/cover/X-DD.png",
-                        link:"https://hsewiu.github.io/X-DD-training-game/EN.html"
-                    },
-                    { 
-                        id: 5, 
-                        title: "霧隠れの島", 
-                        subtitle: "アーケードゲーム体験", 
-                        category: ["UI/UX", "Programming", "Motion"], 
-                        year: "2023", 
-                        desc: "馬祖（マズ）文化を広めるための2D像素風アドベンチャーゲーム。現地の歴史をアーケード形式で体験できるインタラクティブな作品。", 
-                        tags: ["Unity", "Pixel Art", "Midjourney"],
-                        cover:"img/cover/霧嶼.png",
-                        link:"https://millie-wei.notion.site/Fog-Isle-An-Arcade-Game-Experience-for-Mazu-Culture-Promotion-31a7eacfcbc08093a6a2f406aa754535?source=copy_link"
-                    },
-                    { 
-                        id: 6, 
-                        title: "「ポエ占い」と寺院文化：テクノロジーによるインタラクティブ・アート", 
-                        subtitle: "インタラクティブ・アート・インスタレーション", 
-                        category: ["UI/UX", "Programming", "Motion"], 
-                        year: "2024", 
-                        desc: "寺院の「ポエ占い」にインスパイアされたインスタレーション。音声認識でUnityプロジェクションを起動し、願いをデジタルアートに昇華させる。", 
-                        tags: ["Unity", "p5.js", "Teachable Machine"],
-                        cover:"https://file.notion.so/f/f/8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b/9db8038a-3f75-41da-82fa-e24d560de904/%E6%93%B2%E7%AD%8A%E8%88%87%E5%BB%9F%E5%AE%87%E6%96%87%E5%8C%96%EF%BD%9C%E4%BA%92%E5%8B%95%E8%97%9D%E8%A1%93%E3%80%90%E4%BA%BA%E6%A9%9F%E4%BA%92%E5%8B%95%E5%B0%88%E6%A1%88%E3%80%91.gif?table=block&id=31a7eacf-cbc0-8008-bb35-e5714845f6cd&spaceId=8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b&expirationTimestamp=1773792000000&signature=fAEMyYH3hCUmxsU6YtNPMq9LqjZl30kyg98gnXhO0R4",
-                        link:"https://millie-wei.notion.site/Divination-blocks-Interactive-Art-Installation-31a7eacfcbc0804fbfe9f0de897d71d8?source=copy_link"
-                    },
-                    { 
-                        id: 7, 
-                        title: "言語療法データ収集プラットフォーム", 
-                        subtitle: "データ収集プラットフォーム", 
-                        category: ["Programming", "UI/UX"], 
-                        year: "2021", 
-                        desc: "奇美病院との共同プロジェクト。パンデミックに対応した遠隔データ収集プラットフォームで、言語聴覚士の構音障害データ収集を支援。", 
-                        tags: ["Front-End", "Web Interface", "Medical Tool"],
-                        cover:"img/cover/構音治療.png",
-                        link:"https://www.behance.net/gallery/147340259/Platform-of-Speech-TherapyUIUX-Design"
-                    },
-                    { 
-                        id: 8, 
-                        title: "2020 台北ランタンフェスティバルMRT車両絵画", 
-                        subtitle: "期間限定特別列車", 
-                        category: ["Visual"], 
-                        year: "2020", 
-                        desc: "燈節のマスコットを絵本スタイルで再解釈。列車のドアや床面を利用し、没入感のある3Dストーリー空間を構築した。", 
-                        tags: ["Illustration", "Public Art", "Exhibition Design"],
-                        cover:"img/cover/燈節車廂彩繪.png",
-                        link:"https://millie-wei.notion.site/2020-Taipei-Lantern-Festival-MRT-painted-carriages-31a7eacfcbc08004b4e5d90717e306a8?source=copy_link"
-                    },
-                    { 
-                        id: 9, 
-                        title: "調合の方程式", 
-                        subtitle: "合同卒業制作展 総合デザイン", 
-                        category: ["Visual"], 
-                        year: "2019", 
-                        desc: "台北商業大学卒業制作展のメインビジュアル。学科の特色を化学元素に見立て、純白の空間と球池で視覚的な結束力を表現。", 
-                        tags: ["Visual Identity", "Exhibition Space Design"],
-                        cover:"https://i.meee.com.tw/ZpGXoBY.gif",
-                        link:"https://millie-wei.notion.site/Mixing-Formula-NTUB-Joint-Graduation-Exhibition-3187eacfcbc080ca8099d8c7754377a8?source=copy_link"
-                    },
-                    { 
-                        id: 10, 
-                        title: "子時三刻", 
-                        subtitle: "卒業制作展 総合デザイン", 
-                        category: ["Visual"], 
-                        year: "2019", 
-                        desc: "卒業展のサブゾーン。砂時計と脳を用いて、クリエイターが深夜まで創作に打ち込む精神と時間の経過を象徴的に表現。", 
-                        tags: ["Visual Identity", "Merchandise Design"],
-                        cover:"img/cover/子時三刻.png",
-                        link:"https://millie-wei.notion.site/Third-Quarter-at-Midnight-Design-Achievements-Exhibition-31a7eacfcbc080c2894ed6e01315860b?source=copy_link"
-                    },
-                    { 
-                        id: 11, 
-                        title: "インディーゲーム・プラットフォーム「IndieCabin」", 
-                        subtitle: "ビジュアル・アイデンティティ＆イベント企画", 
-                        category: ["Visual"], 
-                        year: "2020", 
-                        desc: "台湾のインディーゲームを推進するプラットフォーム。ブランドビジュアル、オリジナルキャラクター開発、イベントの視覚計画を担当。", 
-                        tags: ["Character Design", "Logo Design", "Illustration"],
-                        cover:"img/cover/IndieCabin.png",
-                        link:"https://millie-wei.notion.site/IndieCabin-Taiwan-Independent-Game-Creation-Platform-31a7eacfcbc0804a9f2ee8958e16676b?source=copy_link"
-                    },
-                    { 
-                        id: 12, 
-                        title: "朝食生物", 
-                        subtitle: "フィギュアデザイン", 
-                        category: ["Visual"], 
-                        year: "2022", 
-                        desc: "「朝食生物生存中！」はオフィスの癒やしプロジェクト。日常の朝食メニューを擬人化し、忙しい社会人に楽しさを届けるデザイン。", 
-                        tags: ["Character Design", "3D Modeling"],
-                        cover:"img/cover/早餐生物.png",
-                        link:"https://www.behance.net/gallery/228763879/Figurine-Design"
-                    },
-                    { 
-                        id: 13, 
-                        title: "Lonesome Hotel", 
-                        subtitle: "独居高齢者向け冬季支援プロジェクト", 
-                        category: ["Motion"], 
-                        year: "2020", 
-                        desc: "弘道基金会と協力した冬期募金プロジェクト。独居高齢者の現実を描いた映像作品で、シンガポールSG Markプラチナ賞を受賞。", 
-                        tags: ["Video Production", "Director", "Social Welfare"],
-                        cover:"https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExeTFhNjI5Z3JoNHc4bGttNzIyeTE1eXRibDc1bDAzb2IyYWp6MHFmdiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/lvtywhETAZHE4pnYqb/giphy.gif",
-                        link:"https://millie-wei.notion.site/LONESOME-HOTEL-3187eacfcbc08036a126f7f4e7969b00?source=copy_link"
-                    },
-                    { 
-                        id: 14, 
-                        title: "ムスリムフレンドリー観光プロモーションアニメ", 
-                        subtitle: "公式プロモーションアニメーション", 
-                        category: ["Motion"], 
-                        year: "2020", 
-                        desc: "台灣ハラールセンターの広報アニメーション。親しみやすいスクラップブックスタイルで、ムスリムフレンドリーな観光情報を発信。", 
-                        tags: ["Motion Graphic", "Scrapbook Style"],
-                        cover:"https://file.notion.so/f/f/8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b/a04e62ad-92fe-4859-baa9-3fc069b08439/2020_%E8%B2%BF%E5%8D%94%E5%8B%95%E7%95%AB_%E7%A9%86%E6%96%AF%E6%9E%97%E6%8E%A8%E5%BB%A3.gif?table=block&id=31a7eacf-cbc0-8053-ac77-d36031b67297&spaceId=8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b&expirationTimestamp=1773792000000&signature=bTigQhrf5QzHUdzk3h_2A8qE9dCnd6GZ7fu1OJSLcQA",
-                        link:"https://millie-wei.notion.site/Taiwan-Halal-Integrity-Development-Association-3187eacfcbc08051b12ec5a09ecc6ae0?source=copy_link"
-                    },
-                    { 
-                        id: 15, 
-                        title: "2020 台北国際ゲームショウ広報アニメーション", 
-                        subtitle: "キービジュアル・モーションデザイン", 
-                        category: ["Motion"], 
-                        year: "2020", 
-                        desc: "2020年台北国際ゲームショウのプロモーションアニメーション。スピーディーな編集でゲーム文化の生命力を表現した作品。", 
-                        tags: ["Motion Graphic", "Video Production"],
-                        cover:"https://i.meee.com.tw/D2ccdf2.gif",
-                        link:"https://millie-wei.notion.site/2020-Taipei-Game-Show-3187eacfcbc080459d8fc4fe37b926ff?source=copy_link"
-                    },
-                    { 
-                        id: 16, 
-                        title: "勇敢さと自信、台湾と共に：大規模プロモーションライブ配信プロジェクト", 
-                        subtitle: "ライブ配信 UI & VFX デザイン", 
-                        category: ["Motion"], 
-                        year: "2020", 
-                        desc: "2020年総選挙キャンペーン用ライブ配信UIおよびVFXデザイン。大規模な配信イベントにおいて、同時視聴者数1,000人超を記録した。", 
-                        tags: ["Motion Graphic", "Live Stream UI"],
-                        cover:"https://i.meee.com.tw/qCRLvH3.gif",
-                        link:"https://millie-wei.notion.site/Brave-Confident-Protect-Taiwan-Together-3187eacfcbc08077bdeecc135cb0b6e2?source=copy_link"
-                    },
-                    { 
-                        id: 17, 
-                        title: "Tea Time：光泉飲料プロモーション CM", 
-                        subtitle: "セブンイレブン向けアニメーション制作", 
-                        category: ["Motion"], 
-                        year: "2020", 
-                        desc: "光泉「午後時光」の7-11向け販促アニメーション。軽快な雰囲気で製品の魅力を伝え、ブランドイメージ向上と販促に貢献した。", 
-                        tags: ["Motion Graphic", "Live Stream UI"],
-                        cover:"https://file.notion.so/f/f/8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b/1dd7c072-5c61-4dba-a63e-69f5b706182a/%E3%80%90%E5%8D%88%E5%BE%8C%E6%99%82%E5%85%89%EF%BC%8D%E5%85%89%E6%B3%89%E9%A3%B2%E5%93%81%E4%BF%83%E9%8A%B7CM%E3%80%91%E5%85%89%E6%B3%89%E9%87%8D%E4%B9%B3%E6%8A%B9%E8%8C%B6%E6%8B%BF%E9%90%B5.gif?table=block&id=31a7eacf-cbc0-8077-bd45-c6595bdb4239&spaceId=8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b&expirationTimestamp=1773792000000&signature=iBwFXUEu8vgzdMiLRM5ImC9uK5oEGZhGXpSJw2-sF7E",
-                        link:"https://millie-wei.notion.site/Afternoon-Tea-Kuang-Chuan-Drinks-Promotional-CM-3187eacfcbc080e6967ee1a81de8e959?source=copy_link"
-                    },
-                    { 
-                        id: 18, 
-                        title: "知っておきたい：化学療法の副作用との向き合い方", 
-                        subtitle: "TBCA 医療啓発アニメーション", 
-                        category: ["Motion"], 
-                        year: "2021", 
-                        desc: "乳がん教育・予防協会（TBCA）向けの教育アニメーション。柔らかい表現で化学療法の副作用に対する理解と対処法を支援。", 
-                        tags: ["Motion Graphic", "Video Production"],
-                        cover:"https://file.notion.so/f/f/8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b/c24684f5-00c2-48ff-aa5a-7f9044f44f64/2021_%E5%81%A5%E8%AB%87_%E8%88%87%E5%8C%96%E7%99%82%E5%85%B1%E8%99%95.gif?table=block&id=31a7eacf-cbc0-8079-8afa-f0d69d66eb73&spaceId=8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b&expirationTimestamp=1773792000000&signature=47S3XhkGbDp4r3LD0JuCzmo21tGc-tY14yhXakw2RWg",
-                        link:"https://millie-wei.notion.site/Living-with-Chemotherapy-Side-Effects-3187eacfcbc080c6b27ec191a0aa8f40?source=copy_link"
-                    },
-                    { 
-                        id: 19, 
-                        title: "慢性腎臓病について知っておくべきこと", 
-                        subtitle: "三軍総合病院臨床薬学部 医療啓発アニメ", 
-                        category: ["Motion"], 
-                        year: "2021", 
-                        desc: "慢性腎臓病の啓発アニメーション。三軍総合病院の委託を受け、視覚的な物語を通じて病状管理と予防策の理解を支援した作品。", 
-                        tags: ["Motion Graphic", "Video Production"],
-                        cover:"https://file.notion.so/f/f/8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b/5a3c1f28-2475-4cc2-9015-e8b757c7d6e9/2021_%E5%81%A5%E8%AB%87_%E8%85%8E%E8%87%9F%E7%97%85.gif?table=block&id=31a7eacf-cbc0-8001-bcee-fa0003c3b659&spaceId=8330f3ce-ef12-4d24-a4c6-2bbc3b5c004b&expirationTimestamp=1773792000000&signature=l1tDV88G9sgGzDpmFRzfwr3_XGhxP6IGe7Rz1G2weVM",
-                        link:"https://millie-wei.notion.site/Things-You-Should-Know-About-Chronic-Kidney-Disease-3187eacfcbc0804f9f42ed035534d801?source=copy_link"
-                    },
-                    { 
-                        id: 20, 
-                        title: "枯れて、なお生きる", 
-                        subtitle: "2Dアニメーション制作", 
-                        category: ["Motion"], 
-                        year: "2019", 
-                        desc: "2019年バハムートACG創作大賞ファイナリスト。いじめ、自己反省、自己価値の肯定をテーマにした手書きの2Dアニメーション。", 
-                        tags: ["2D Animation", "Character Design", "Storyboarding"],
-                        cover:"https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExbjB2ejRzN3BiZ2FtMzVtbHB3Z2g4eGpwZjdidGRhNTNmamZobXc1MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/aWYZum6HcYXb7qZPca/giphy.gif",
-                        link:"https://millie-wei.notion.site/Life-After-Witherin-3187eacfcbc080e1b78bd2f4631a4445?source=copy_link"
-                    },
-                    { 
-                        id: 21, 
-                        title: "Freelance Illustration", 
-                        subtitle: "Commission Works", 
-                        category: ["Illustration"], 
-                        year: "2020", 
-                        desc: "ゲームキャラクター、YouTuberバナー、テーマアバターなど、幅広いイラスト制作を承っております。それぞれのプロジェクトは、クライアントのニーズに応える、力強いビジュアルスタイルとクリエイティブコンセプトに基づいています。", 
-                        tags: ["illustration"],
-                        cover:"img/cover/commision.jpg",
-                        link:"https://millie-wei.notion.site/Freelance-Illustration-31a7eacfcbc080a093c6cf33a8adb2e2?source=copy_link"
-                    },
-                    { 
-                        id: 22, 
-                        title: "OC / Fan Creation", 
-                        subtitle: "Personal Creation", 
-                        category: ["Illustration"], 
-                        year: "2020", 
-                        desc: "個人によるオリジナルキャラクター作品とファンによる作品。", 
-                        tags: ["illustration"],
-                        cover:"img/cover/個人創作.png",
-                        link:"https://millie-wei.notion.site/OC-Fan-Creation-3217eacfcbc0800792fff20cd838afc4?source=copy_link"
-                    }
-                ]
-            }
-        };
+  <!-- ========= 03 COMMERCIAL ========= -->
+  <section id="commercial" class="border-b border-hairline">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-10 py-20 md:py-28">
+      <!-- section header -->
+      <div class="flex items-baseline justify-between mb-10">
+        <div class="flex items-baseline gap-4 md:gap-6">
+          <span class="font-mono text-[11px]" style="color:var(--ink-muted)">§ 03</span>
+          <h2 class="font-serif-display text-[48px] md:text-[68px] leading-none">Official Works</h2>
+        </div>
+        <span class="font-mono text-[11px] hidden md:inline" style="color:var(--ink-muted)">— 商業 &amp; 委託</span>
+      </div>
 
-        let currentLang = 'zh';
-        let currentFilter = 'All';
+      <p class="text-[14px] md:text-[15px] leading-[1.9] max-w-[60ch] mb-10" style="color:var(--ink-muted)">
+        各種跨領域設計與開發。
+      </p>
 
-        // ==========================================
-        // 2. 應用程式邏輯區
-        // ==========================================
-        document.addEventListener('DOMContentLoaded', () => {
-            initNavbar();
-            applyLanguage(); 
-        });
+      <!-- Tabs -->
+      <div class="flex items-end justify-between border-b border-hairline pb-3 mb-10 overflow-x-auto">
+        <div id="commercial-tabs" class="flex gap-6 md:gap-8 font-mono text-[11px] md:text-[12px] whitespace-nowrap">
+          <!-- filled by JS -->
+        </div>
+        <div class="hidden md:flex items-center gap-2 font-mono text-[10px]" style="color:var(--ink-faint)">
+          <span id="commercial-count">—</span>
+          <span>·</span>
+          <button id="layout-toggle" class="underline underline-offset-4 hover:text-[var(--ink)]">TOGGLE&nbsp;LAYOUT</button>
+        </div>
+      </div>
 
-        // --- 語言切換邏輯 ---
-        window.setLang = function(lang) {
-            currentLang = lang;
-            
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                if(btn.id === `btn-${lang}`) {
-                    btn.classList.add('bg-valMain', 'text-valLight');
-                    btn.classList.remove('text-valGray', 'hover:text-valLight');
-                } else {
-                    btn.classList.remove('bg-valMain', 'text-valLight');
-                    btn.classList.add('text-valGray', 'hover:text-valLight');
-                }
-            });
+      <!-- Grid -->
+      <div id="commercial-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-14">
+        <!-- cards injected -->
+      </div>
+    </div>
+  </section>
 
-            applyLanguage();
-        };
+  <!-- ========= 04 INDIE ========= -->
+  <section id="personal" class="personal-section border-b border-hairline">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-10 py-20 md:py-28">
 
-        function applyLanguage() {
-            const t = i18n[currentLang];
-            
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const keys = el.getAttribute('data-i18n').split('.');
-                let val = t;
-                keys.forEach(k => { if(val) val = val[k] });
-                if(val) el.innerHTML = val;
-            });
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        <!-- sticky left column -->
+        <div class="lg:col-span-4 lg:sticky lg:top-20 self-start">
+          <div class="flex items-baseline gap-4 md:gap-6 mb-6">
+            <span class="font-mono text-[11px] muted">§ 04</span>
+            <span class="font-mono text-[11px] muted">INDIE DEV</span>
+          </div>
+          <h2 class="font-serif-display text-[52px] md:text-[76px] leading-[1.02]">
+            Welcome to<br/>
+            My <span class="text-accent">Playground</span>.
+          </h2>
+          <p class="mt-6 text-[14px] md:text-[15px] leading-[1.95] muted" style="color:var(--ink-muted)">
+            腦袋發熱的造物，已完成的未完成的都在這裡。
+          </p>
+        </div>
 
-            renderExperience(t);
-            renderAwards(t);
-            renderEducation(t);
-            renderCategoryFilters(t);
-            renderProjects(t, currentFilter);
-            
-            lucide.createIcons();
-        }
+        <!-- personal cards -->
+        <div class="lg:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-10" id="personal-list">
+          <!-- rendered by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
 
-        // --- 渲染函式 ---
-        function renderExperience(t) {
-            const container = document.getElementById('experience-list');
-            container.innerHTML = t.experiences.map((exp) => `
-                <div class="relative pl-6 border-l-2 border-valDark/10 hover:border-valMain transition-colors pb-6 group">
-                    <div class="absolute -left-[5px] top-1 w-2 h-2 bg-valLight border-2 border-valDark group-hover:bg-valMain group-hover:border-valMain transition-colors rotate-45"></div>
-                    <div class="mb-1">
-                        <span class="text-sm font-valTitle font-bold text-valGray tracking-widest uppercase">${exp.year}</span>
-                    </div>
-                    <h4 class="font-valTitle text-2xl text-valDark uppercase font-bold tracking-wide">${exp.title}</h4>
-                    <div class="text-valMain font-valBody text-sm font-bold tracking-widest uppercase mb-3">${exp.company}</div>
-                    <p class="text-valDark/80 font-valBody text-base font-medium leading-relaxed">${exp.description}</p>
-                </div>
-            `).join('');
-        }
+  <!-- ========= 05 CONTACT ========= -->
+  <section id="contact">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-10 py-20 md:py-28">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
+        <div class="lg:col-span-8">
+          <div class="font-mono text-[11px] mb-6" style="color:var(--ink-muted)">§ 05 — CONTACT</div>
+          <h2 class="text-[44px] md:text-[72px] lg:text-[88px] leading-[1.02] tracking-[-0.02em] font-light">
+            Let's make something
+            <span class="font-serif-display text-accent">Cool :></span>
+          </h2>
+          <p class="mt-6 text-[15px] leading-[1.9] max-w-[44ch]" style="color:var(--ink-muted)">
+            歡迎直接來信，找我創作有趣的東西！
+          </p>
+        </div>
 
-        function renderAwards(t) {
-            const container = document.getElementById('awards-list');
-            container.innerHTML = t.awards.map(aw => `
-                <div class="p-4 border border-valDark/10 bg-white hover:border-valMain transition-colors group flex flex-col justify-center clip-corner">
-                    <span class="font-valBody text-base text-valDark font-black uppercase tracking-wide group-hover:text-valMain transition-colors">${aw.name}</span>
-                    <span class="font-valBody text-valGray text-sm font-normal uppercase tracking-widest mt-1 transition-colors">${aw.subtitle}</span>
-                </div>
-            `).join('');
-        }
+        <div class="lg:col-span-4">
+          <ul class="space-y-4 font-mono text-[13px]">
+            <li class="flex items-center justify-between border-b border-hairline pb-3">
+              <span style="color:var(--ink-faint)">EMAIL</span>
+              <a href="mailto:julieya.wei@gmail.com" class="link-accent">julieya.wei@gmail.com</a>
+            </li>
+            <li class="flex items-center justify-between border-b border-hairline pb-3">
+              <span style="color:var(--ink-faint)">MEDIUM</span>
+              <a href="https://millie-wei.medium.com/" class="link-accent">@millie-wei ↗</a>
+            </li>
+            <li class="flex items-center justify-between border-b border-hairline pb-3">
+              <span style="color:var(--ink-faint)">BEHANCE</span>
+              <a href="https://www.behance.net/xiaorongwei" class="link-accent">@xiaorongwei ↗</a>
+            </li>
+            <li class="flex items-center justify-between border-b border-hairline pb-3">
+              <span style="color:var(--ink-faint)">PIXIV</span>
+              <a href="https://www.pixiv.net/users/4556408" class="link-accent">@4556408 ↗</a>
+            </li>
+            <li class="flex items-center justify-between border-b border-hairline pb-3">
+              <span style="color:var(--ink-faint)">GITHUB</span>
+              <a href="https://github.com/hsewiu" class="link-accent">@hsewiu ↗</a>
+            </li>
+            <li class="flex items-center justify-between">
+              <span style="color:var(--ink-faint)">CV</span>
+              <a href="https://drive.google.com/file/d/1W8EIoQdcIgUVH-MIEzfMtoWfqbWrNY1S/view" class="link-accent">View resume ↗</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
 
-        function renderEducation(t) {
-            const container = document.getElementById('education-list');
-            container.innerHTML = t.education.map((edu) => `
-                <div class="relative pl-6 border-l-2 border-valDark/10 hover:border-valDark transition-colors pb-6 group">
-                    <div class="absolute -left-[5px] top-1 w-2 h-2 bg-valLight border-2 border-valDark group-hover:bg-valDark transition-colors rotate-45"></div>
-                    <div class="mb-1">
-                        <span class="text-sm font-valTitle font-bold text-valGray tracking-widest uppercase">${edu.tag}</span>
-                    </div>
-                    <h4 class="font-valTitle text-2xl text-valDark uppercase font-bold tracking-wide">${edu.major}</h4>
-                    <div class="text-valDark/60 font-valBody text-sm font-bold tracking-widest uppercase mb-3">${edu.school}</div>
-                </div>
-            `).join('');
-        }
+    <!-- Footer -->
+    <div class="border-t border-hairline">
+      <div class="max-w-[1400px] mx-auto px-6 md:px-10 py-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 font-mono text-[10px]" style="color:var(--ink-muted)">
+        <div>© 2026 MILLIE&nbsp;WEI · All rights reserved.</div>
+      </div>
+    </div>
+  </section>
 
-        function renderCategoryFilters(t) {
-            const container = document.getElementById('category-filters');
-            container.innerHTML = t.categories.map(cat => `
-                <button 
-                    onclick="filterProjects('${cat.id}')"
-                    class="px-5 py-2 font-cubic text-sm uppercase tracking-widest border transition-all ${cat.id === currentFilter ? 'bg-valMain text-valLight border-valMain' : 'bg-transparent text-valGray border-white/10 hover:bg-white/5 hover:text-valLight'}"
-                >
-                    ${cat.label}
-                </button>
-            `).join('');
-        }
+</main>
 
-        function renderProjects(t, filterId) {
-            const container = document.getElementById('projects-container');
-            
-            const filtered = filterId === 'All' 
-                ? t.projects 
-                : t.projects.filter(p => p.category.includes(filterId));
+<!-- Data + logic -->
+<script src="data.js"></script>
+<script src="app.js"></script>
 
-            container.innerHTML = filtered.map(project => `
-                <a href="${project.link}" target="_blank" class="val-card bg-[#1A252E] border border-white/5 clip-corner flex flex-col p-5 cursor-pointer relative group h-full">
-                    
-                    <!-- 卡片圖片區 (預覽圖) -->
-                    <div class="w-full aspect-video bg-valDarker relative overflow-hidden clip-corner mb-5 border border-white/5 transition-all">
-                        <!-- 預設圖：您可以替換 src 為您的作品圖 -->
-                        <img src="${project.cover}" alt="${project.title}" class="w-full h-full object-cover group-hover:saturate-100 group-hover:scale-110 transition-all duration-500 opacity-80 group-hover:opacity-100">
-                        
-                        <!-- Hover 遮罩效果 -->
-                        <div class="absolute inset-0 bg-valDark/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
-                            <div class="absolute inset-0 bg-[linear-gradient(transparent_50%,rgba(0,0,0,0.4)_50%)] bg-[length:100%_4px] pointer-events-none mix-blend-overlay"></div>
-                            <span class="text-valLight font-valTitle text-xl font-bold tracking-[0.2em] uppercase flex items-center gap-2">
-                                <i data-lucide="eye" class="w-5 h-5"></i> ${t.viewDetail}
-                            </span>
-                        </div>
-                    </div>
+<!-- Hero live weather + clock (Taipei) -->
+<script>
+(function () {
+  const timeEls = [document.getElementById('hero-time'), document.getElementById('rail-time')].filter(Boolean);
+  const iconEls = [document.getElementById('hero-wx-icon'), document.getElementById('rail-wx-icon')].filter(Boolean);
+  const tempEls = [document.getElementById('hero-wx-temp'), document.getElementById('rail-wx-temp')].filter(Boolean);
+  if (!timeEls.length) return;
 
-                    <!-- 卡片內容區 -->
-                    <div class="flex-1 flex flex-col z-10 px-1">
-                        <div class="mb-3">
-                            <div class="text-valMain font-valBody text-xs font-bold tracking-widest uppercase mb-1 group-hover:text-valLight transition-colors">${project.subtitle}</div>
-                            <h4 class="font-valTitle text-2xl lg:text-3xl font-bold text-valLight uppercase tracking-wide leading-tight">
-                                ${project.title}
-                            </h4>
-                        </div>
-                        
-                        <p class="font-valBody text-valGray text-sm font-medium leading-relaxed mb-6 flex-1 group-hover:text-valLight/90 transition-colors">
-                            ${project.desc}
-                        </p>
+  // -- Clock (Asia/Taipei) --
+  const fmt = new Intl.DateTimeFormat('en-GB', {
+    timeZone: 'Asia/Taipei',
+    hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false
+  });
+  function tick() { const t = fmt.format(new Date()); timeEls.forEach(el => el.textContent = t); }
+  tick();
+  setInterval(tick, 1000);
 
-                        <div class="flex flex-wrap gap-2 mt-auto border-t border-white/10 group-hover:border-valLight/30 pt-4 transition-colors">
-                            ${project.tags.map(tag => `
-                                <span class="text-[10px] font-valBody text-valLight/70 font-bold uppercase tracking-widest bg-black/30 border border-white/5 px-2 py-1 group-hover:text-valLight group-hover:border-valLight/30 transition-colors">
-                                    ${tag}
-                                </span>
-                            `).join('')}
-                        </div>
-                    </div>
-                </a>
-            `).join('');
+  // -- Weather (Open-Meteo, no key required) --
+  // WMO weather code → compact glyph
+  // https://open-meteo.com/en/docs — code reference
+  function glyph(code, isDay) {
+    if (code === 0) return isDay ? '☀' : '☾';                // clear
+    if (code === 1 || code === 2) return isDay ? '☁' : '☁';  // mainly clear / partly cloudy
+    if (code === 3) return '☁';                               // overcast
+    if (code === 45 || code === 48) return '☁';               // fog
+    if (code >= 51 && code <= 57) return '☂';                 // drizzle
+    if (code >= 61 && code <= 67) return '☂';                 // rain
+    if (code >= 71 && code <= 77) return '❄';                 // snow
+    if (code >= 80 && code <= 82) return '☂';                 // rain showers
+    if (code >= 85 && code <= 86) return '❄';                 // snow showers
+    if (code >= 95) return '⚡';                              // thunder
+    return '◌';
+  }
 
-            lucide.createIcons();
-        }
+  const url = 'https://api.open-meteo.com/v1/forecast'
+    + '?latitude=25.0330&longitude=121.5654'
+    + '&current=temperature_2m,weather_code,is_day'
+    + '&timezone=Asia%2FTaipei';
 
-        window.filterProjects = function(category) {
-            currentFilter = category;
-            applyLanguage(); 
-        };
-
-        // --- UI 互動邏輯 ---
-        function initNavbar() {
-            window.addEventListener('scroll', () => {
-                const nav = document.getElementById('navbar');
-                if (window.scrollY > 50) {
-                    nav.classList.add('shadow-lg', 'bg-valDark/95');
-                    nav.classList.remove('bg-valDark/90');
-                } else {
-                    nav.classList.remove('shadow-lg', 'bg-valDark/95');
-                    nav.classList.add('bg-valDark/90');
-                }
-            });
-        }
-
-    </script>
+  fetch(url)
+    .then(r => r.ok ? r.json() : Promise.reject(r.status))
+    .then(d => {
+      const c = d && d.current;
+      if (!c) return;
+      const t = Math.round(c.temperature_2m);
+      const g = glyph(c.weather_code, c.is_day === 1);
+      iconEls.forEach(el => el.textContent = g);
+      tempEls.forEach(el => el.textContent = t + '°');
+    })
+    .catch(() => {
+      iconEls.forEach(el => el.textContent = '◌');
+      tempEls.forEach(el => el.textContent = '—');
+    });
+})();
+</script>
 </body>
 </html>
