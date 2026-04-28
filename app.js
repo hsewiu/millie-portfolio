@@ -106,7 +106,7 @@ function commercialCardGrid(p, i) {
       <div class="absolute top-3 right-3 font-mono text-[10px]" style="color:var(--ink-muted)">
         ${p.year}
       </div>
-      ${p.featured ? `<div class="absolute bottom-3 left-3 font-mono text-[9px] px-2 py-[3px] rounded-full bg-accent text-white">FEATURED</div>` : ''}
+      ${p.featured ? `<div class="absolute bottom-3 left-3 font-mono text-[9px] px-2 py-[3px] rounded-full bg-bg text-white">FEATURED</div>` : ''}
     </div>
     <div class="flex items-start justify-between gap-3">
       <h3 class="text-[17px] leading-[1.35] font-medium">
@@ -179,7 +179,7 @@ function personalCard(p) {
         }
       </div>
 
-      ${p.featured ? `<div class="absolute bottom-3 left-1/2 -translate-x-1/2 font-mono text-[9px] px-2 py-[3px] rounded-full bg-accent text-white">FEATURED</div>` : ''}
+      ${p.featured ? `<div class="absolute bottom-3 left-1/2 -translate-x-1/2 font-mono text-[9px] px-2 py-[3px] rounded-full bg-bg text-white">FEATURED</div>` : ''}
     </div>
 
     <!-- BODY -->
