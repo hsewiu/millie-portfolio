@@ -288,6 +288,30 @@ document.getElementById('layout-toggle')?.addEventListener('click', () => {
   renderCommercialGrid();
 });
 
+
+// ── CRT + Fisheye toggle ──
+(function () {
+  let crtOn = true;
+  let fisheyeOn = false;
+
+  function toggleCRT(force) {
+    crtOn = force !== undefined ? force : !crtOn;
+    document.body.classList.toggle('crt-on', crtOn);
+  }
+  function toggleFisheye(force) {
+    fisheyeOn = force !== undefined ? force : !fisheyeOn;
+    document.body.classList.toggle('fisheye-on', fisheyeOn);
+  }
+
+  // 範例：Tweaks 面板裡加入開關
+  // toggleCRT(window.__TWEAKS.crt ?? false);
+  // toggleFisheye(window.__TWEAKS.fisheye ?? false);
+
+  // 暴露到全域讓 Tweaks 或其他地方呼叫
+  window.toggleCRT = toggleCRT;
+  window.toggleFisheye = toggleFisheye;
+})();
+
 // ============ Tweaks ============
 (function () {
   const panel = document.getElementById('tweaks-panel');
@@ -328,6 +352,9 @@ document.getElementById('layout-toggle')?.addEventListener('click', () => {
     document.querySelectorAll('[data-font]').forEach(el => {
       el.setAttribute('data-on', String(el.dataset.font === (t.displayFont || 'vt323')));
     });
+
+    window.toggleCRT?.(t.crt ?? false);
+    window.toggleFisheye?.(t.fisheye ?? false);
   }
 
   function persist(patch) {
