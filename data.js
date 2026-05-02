@@ -56,7 +56,7 @@ window.PERSONAL_PROJECTS = [
     title: "幸研計劃",
     subtitle: "原創漫畫故事 · Ongoing",
     year: "2012 — now",
-    desc: "一群男孩子們香噴噴的愛情故事。從高中開始與基友 Raphael 畫著直到現在，存在多個支線和人物群。正在緩慢整理故事連載中，以發行刊物為目標。",
+    desc: "一群男孩子的浪漫怪談。從高中開始與基友 Raphael 畫著直到現在的大坑，存在多個支線和人物群。正在緩慢整理故事連載中，以發行刊物為目標。",
     stats: [["CHAPTERS","03"], ["PAGES","112"], ["UPDATE","Monthly"]],
     link: "https://hsewiu.github.io/Alternative-Story/",
     cover: "img/cover/幸研計劃.png",
