@@ -22,9 +22,9 @@ function el(tag, attrs = {}, ...children) {
   window.TIMELINE.forEach(row => {
     const li = el('li', { class: 'grid grid-cols-12 gap-4 py-2 hover:bg-black/[0.02] transition-colors' });
     li.innerHTML = `
-      <div class="col-span-3 md:col-span-2 font-mono text-[12px] num pt-[2px]" style="color:var(--ink-faint)">${row.year}</div>
-      <div class="col-span-9 md:col-span-7 text-[14px] leading-[1.6]">${row.title}</div>
-      <div class="hidden md:block md:col-span-3 font-mono text-[11px] text-right pt-[2px]" style="color:var(--ink-muted)">${row.role}</div>
+      <div class="col-span-3 md:col-span-2 font-mono text-[12px] num pt-[2px]" style="color:var(--ink-faint)">${escapeHTML(row.year)}</div>
+      <div class="col-span-9 md:col-span-7 text-[14px] leading-[1.6]">${escapeHTML(row.title)}</div>
+      <div class="hidden md:block md:col-span-3 font-mono text-[11px] text-right pt-[2px]" style="color:var(--ink-muted)">${escapeHTML(row.role)}</div>
     `;
     ul.appendChild(li);
   });
@@ -81,7 +81,7 @@ function coverSVG(title, year, isDark=false) {
       <text x="596" y="56" font-family="JetBrains Mono, monospace" font-size="11" fill="${fg}" text-anchor="end">${year}</text>
       <circle cx="320" cy="180" r="46" stroke="${fg}" stroke-width="0.8" fill="none"/>
       <circle cx="320" cy="180" r="22" stroke="${fg}" stroke-width="0.8" fill="none" stroke-dasharray="2 3"/>
-      <text x="320" y="320" font-family="Instrument Serif, serif" font-style="italic" font-size="15" fill="${fg}" text-anchor="middle">— ${title.slice(0,24)} —</text>
+      <text x="320" y="320" font-family="Instrument Serif, serif" font-style="italic" font-size="15" fill="${fg}" text-anchor="middle">— ${escapeHTML(title.slice(0,24))} —</text>
     </svg>
   `;
 }
@@ -303,11 +303,7 @@ document.getElementById('layout-toggle')?.addEventListener('click', () => {
     document.body.classList.toggle('fisheye-on', fisheyeOn);
   }
 
-  // 範例：Tweaks 面板裡加入開關
-  // toggleCRT(window.__TWEAKS.crt ?? false);
-  // toggleFisheye(window.__TWEAKS.fisheye ?? false);
-
-  // 暴露到全域讓 Tweaks 或其他地方呼叫
+  // exposed globally for Tweaks panel
   window.toggleCRT = toggleCRT;
   window.toggleFisheye = toggleFisheye;
 })();

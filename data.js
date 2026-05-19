@@ -57,7 +57,6 @@ window.PERSONAL_PROJECTS = [
     subtitle: "原創漫畫故事 · Ongoing",
     year: "2012 — now",
     desc: "一群男孩子的浪漫怪談。從高中開始與基友 Raphael 畫著直到現在的大坑，存在多個支線和人物群。正在緩慢整理故事連載中，以發行刊物為目標。",
-    stats: [["CHAPTERS","03"], ["PAGES","112"], ["UPDATE","Monthly"]],
     link: "https://hsewiu.github.io/Alternative-Story/",
     cover: "img/cover/幸研計劃.png",
     linkLabel: "WEBSITE ↗"
@@ -69,7 +68,6 @@ window.PERSONAL_PROJECTS = [
     subtitle: "Personal Creations",
     year: "2012 — now",
     desc: "個人自發性的原創角色創作與粉絲創作。",
-    stats: [["STORIES","04"], ["PRINT","Risograph"], ["EDITION","200"]],
     link: "https://millie-wei.notion.site/OC-Fan-Creation-3217eacfcbc0800792fff20cd838afc4?source=copy_link",
     cover: "img/cover/個人創作.png",
     linkLabel: "VIEW ↗"
@@ -81,7 +79,6 @@ window.PERSONAL_PROJECTS = [
     subtitle: "線上專注工具 · Open-source",
     year: "2025",
     desc: "Vibe Coding初嘗試。一個結合遊戲音樂與CRT效果的線上番茄鐘，使用者能與朋友一起在線專注工作或學習。每個人都會化身為一隻可愛小emoji，發表心情小語與專注狀態。",
-    stats: [["STACK","Electron · Canvas"], ["STARS","124"], ["STATUS","Open-source"]],
     link: "https://hsewiu.github.io/pixel-pomodoro/",
     cover: "img/cover/pomodoro.png",
     linkLabel: "WEBSITE ↗"
