@@ -40,8 +40,8 @@ window.COMMERCIAL_CATEGORIES = [
 window.TIMELINE = [
   { year: "2024", title: "智慧護膝3+3 · 七音之星", role: "Dev / UI/UX" },
   { year: "2023", title: "X-DD · EATVIBE · 霧嶼 · 肌少症檢測系統", role: "Dev / UI/UX / PM" },
-  { year: "2022", title: "智慧健康好夥伴", role: "PM / UI/UX / Dev" },
-  { year: "2021", title: "IHPSS · 語音治療平台 · BacilluSense · 衛教動畫系列", role: "PM / UI/UX / Dev / Motion" },
+  { year: "2022", title: "智慧健康好夥伴", role: "UI/UX / Dev" },
+  { year: "2021", title: "IHPSS · 語音治療平台 · BacilluSense · 衛教動畫系列", role: "UI/UX / Dev / Motion" },
   { year: "2020", title: "台北燈節彩繪車廂 · IndieCabin · 台北電玩展 · 直播介面", role: "Visual / Motion / UI" },
   { year: "2019", title: "調配公式 — 設計展主視覺", role: "Visual / Exhibition" },
   { year: "2018", title: "蜂巢行動募資專案 · 社民黨募資網站", role: "UI/UX" },
