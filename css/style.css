@@ -1,0 +1,301 @@
+:root {
+  --bg: #2919DC;
+  --surface: #fafaf7c7;
+  --ink: #fafaf7c9;
+  --ink-muted: #fafaf7cf;
+  --ink-faint: #fafaf78b;
+  --hairline: #E5E5E0;
+  --hairline-strong: #D4D4CE;
+  --accent: #FAFAF7; /*E85D2F;*/
+  --dark-bg: #0E0E0E;
+  --dark-surface: #1A1A1A;
+  --dark-hairline: #2A2A2A;
+}
+::selection {
+  background-color: #FAFAF7;
+  color: #0E0E0E;
+}
+
+html, body { background: var(--bg); color: var(--ink); }
+body {
+  font-family: 'Noto Sans TC', -apple-system, sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.font-mono { font-family: 'JetBrains Mono', ui-monospace, monospace; letter-spacing: -0.01em; }
+
+/* Display font — switchable via --display-font (Tweaks) */
+:root { --display-font: 'VT323', 'DotGothic16', 'JetBrains Mono', monospace; --display-tracking: 0em; --display-weight: 400; }
+.font-serif-display {
+  font-family: var(--display-font);
+  font-weight: var(--display-weight);
+  font-style: normal !important;       /* pixel fonts have no italic — avoid fake-slant */
+  letter-spacing: var(--display-tracking);
+  text-transform: none;
+}
+/* make any inline italic inside display text render upright */
+.font-serif-display i, .font-serif-display em { font-style: normal; }
+
+/* Fine hairline dividers */
+.hairline { background: var(--hairline-strong); }
+.border-hairline { border-color: var(--hairline-strong); }
+
+/* Accent */
+.text-accent { color: var(--accent); }
+.bg-accent { background: var(--accent); }
+.border-accent { border-color: var(--accent); }
+.text-bg { color: var(--bg); }
+.bg-bg { background: var(--bg); }
+
+/* Tab underline */
+.tab-btn { position: relative; transition: color .2s; }
+.tab-btn[data-active="true"] { color: var(--ink); }
+.tab-btn[data-active="false"] { color: var(--ink-faint); }
+.tab-btn::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -13px;
+  height: 1px; background: var(--ink); transform: scaleX(0); transform-origin: left;
+  transition: transform .3s cubic-bezier(.2,.7,.2,1);
+}
+.tab-btn[data-active="true"]::after { transform: scaleX(1); }
+
+/* Work card hover */
+.work-card { transition: transform .35s cubic-bezier(.2,.7,.2,1); }
+.work-card .work-arrow { transition: transform .25s ease; display: inline-block; }
+.work-card:hover .work-arrow { transform: translate(3px, -3px); }
+.work-card .work-title-underline {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0 1px no-repeat;
+  transition: background-size .35s cubic-bezier(.2,.7,.2,1);
+}
+.work-card:hover .work-title-underline { background-size: 100% 1px; }
+.work-card .cover-img { transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+.work-card:hover .cover-img { transform: scale(1.03); }
+  /* 封面圖預設灰階，hover 時還原彩色 */
+  .work-card img {
+    filter: grayscale(1);
+    transition: filter .4s ease;
+  }
+  .work-card:hover img {
+    filter: grayscale(0);
+  }
+
+/* Cover placeholder — for images that fail or are loading */
+.cover-ph {
+  background-image:
+    repeating-linear-gradient(135deg, rgba(0,0,0,0.035) 0 1px, transparent 1px 9px),
+    linear-gradient(#f4f4ef, #eceae3);
+}
+.cover-ph-dark {
+  background-image:
+    repeating-linear-gradient(135deg, rgba(255,255,255,0.04) 0 1px, transparent 1px 9px),
+    linear-gradient(#181818, #0e0e0e);
+}
+
+/* Marquee */
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.marquee-track { animation: marquee 40s linear infinite; }
+
+/* Hero line-art placeholder subtle movement */
+@keyframes floaty { 0%,100%{transform:translate(0,0)} 50%{transform:translate(0,-4px)} }
+.floaty { animation: floaty 5s ease-in-out infinite; }
+
+/* Live indicator pulse */
+@keyframes livepulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: .4; transform: scale(.75); }
+}
+
+/* Section index pills */
+.nav-pill { transition: color .15s; }
+.nav-pill:hover { color: var(--ink); }
+.nav-pill[data-on="true"] { color: var(--accent); }
+
+/* Personal dark mode */
+body[data-personal-dark="true"] .personal-section {
+  background: var(--dark-bg); color: #F5F5F0;
+}
+body[data-personal-dark="true"] .personal-section .personal-card {
+  background: var(--dark-surface); border-color: var(--dark-hairline);
+}
+body[data-personal-dark="true"] .personal-section .muted { color: #8A8A85; }
+body[data-personal-dark="true"] .personal-section .hairline-personal { background: var(--dark-hairline); }
+body[data-personal-dark="false"] .personal-section .hairline-personal { background: var(--hairline-strong); }
+body[data-personal-dark="false"] .personal-section .personal-card {
+  background: #FFFFFF; border-color: var(--hairline-strong);
+}
+
+/* Scrollbar minimal */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: #d7d7d0; border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: #bcbcb4; }
+
+/* Tweaks panel */
+.tweaks-panel {
+  position: fixed; right: 20px; bottom: 20px; z-index: 80;
+  background: #FFFFFF; border: 1px solid var(--hairline-strong);
+  border-radius: 14px; padding: 14px; width: 240px;
+  box-shadow: 0 4px 24px rgba(0,0,0,.06);
+  font-family: 'JetBrains Mono', monospace; font-size: 11px;
+  display: none;
+}
+.tweaks-panel[data-open="true"] { display: block; }
+.tweaks-swatch { width: 22px; height: 22px; border-radius: 999px; border: 1px solid var(--hairline-strong); cursor: pointer; }
+.tweaks-swatch[data-on="true"] { outline: 2px solid var(--ink); outline-offset: 2px; }
+.tweaks-toggle {
+  display: inline-flex; align-items: center; gap: 6px; cursor: pointer;
+  padding: 4px 8px; border: 1px solid var(--hairline-strong); border-radius: 999px;
+  font-size: 10px;
+}
+.tweaks-toggle[data-on="true"] { background: var(--ink); color: #fff; border-color: var(--ink); }
+
+/* Responsive horizontal scroll for personal cards */
+.hscroll { scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; }
+.hscroll > * { scroll-snap-align: start; }
+
+/* Accent-bound helpers */
+.accent-underline { text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 4px; text-decoration-thickness: 2px; }
+a.link-accent { color: var(--accent); }
+a.link-accent:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+/* Category chip */
+.chip {
+  display: inline-block; padding: 2px 8px; border: 1px solid var(--hairline-strong);
+  border-radius: 999px; font-family: 'JetBrains Mono', monospace; font-size: 10px;
+  letter-spacing: 0.04em; color: var(--ink-muted);
+}
+body[data-personal-dark="true"] .personal-section .chip {
+  border-color: var(--dark-hairline); color: #A0A09A;
+}
+
+/* Numbering */
+.num { font-variant-numeric: tabular-nums; }
+
+/* ===== Side rail (desktop) ===== */
+.rail-item {
+  position: relative;
+  display: flex; align-items: baseline; gap: 14px;
+  padding: 9px 0 9px 14px;
+  color: var(--ink-muted);
+  transition: color .2s, padding .25s cubic-bezier(.2,.7,.2,1);
+}
+.rail-item .rail-num {
+  font-size: 10px; letter-spacing: 0.05em;
+  color: var(--ink-faint); min-width: 20px;
+  transition: color .2s;
+}
+.rail-item .rail-label {
+  letter-spacing: 0.05em;
+  transition: letter-spacing .25s cubic-bezier(.2,.7,.2,1);
+}
+/* animated left marker line */
+.rail-item::before {
+  content: ""; position: absolute;
+  left: 0; top: 50%; transform: translateY(-50%);
+  height: 1px; width: 0;
+  background: currentColor;
+  transition: width .35s cubic-bezier(.2,.7,.2,1);
+}
+.rail-item:hover { color: var(--ink); padding-left: 18px; }
+.rail-item:hover .rail-num { color: var(--ink-muted); }
+.rail-item:hover::before { width: 8px; }
+
+/* active state (driven by data-on attr set via IntersectionObserver) */
+.rail-item[data-on="true"] {
+  color: var(--accent);
+  padding-left: 22px;
+}
+.rail-item[data-on="true"] .rail-num { color: var(--accent); opacity: .6; }
+.rail-item[data-on="true"]::before {
+  width: 14px; background: var(--accent); height: 2px;
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 18%, transparent);
+}
+
+/* content offset for desktop */
+@media (min-width: 1024px) {
+  body { padding-left: 220px; }
+  main { padding-top: 0 !important; }
+  /* hide hero top live widget on desktop — now lives in rail */
+  #hero-live { display: none !important; }
+}
+
+/* ── CRT scanlines + vignette ── */
+#crt-screen {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+body.crt-on #crt-screen { opacity: 1; }
+
+/* scanlines */
+#crt-screen::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px, transparent 2px,
+    rgba(0,0,0,0.1) 2px, rgba(0,0,0,0.1) 3px
+  );
+}
+
+/* vignette + 磷光綠調 */
+#crt-screen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at center, transparent 38%, rgba(7, 2, 11, 0.2) 100%),
+    linear-gradient(180deg, rgba(0,255,60,0.025) 0%, rgba(0,255,60,0.01) 100%);
+}
+
+/* 移動掃描線 */
+#crt-scanroll {
+  position: absolute;
+  inset-inline: 0;
+  height: 120px;
+  background: linear-gradient(transparent, rgba(0,255,60,0.03), transparent);
+  animation: scanroll 7s linear infinite;
+  opacity: 0;
+}
+body.crt-on #crt-scanroll { opacity: 1; }
+
+@keyframes scanroll {
+  from { transform: translateY(-120px); }
+  to   { transform: translateY(100vh); }
+}
+
+/* 偶發閃爍 */
+@keyframes crt-flicker {
+  0%,91%,100% { opacity: 1; }
+  92%          { opacity: 0.84; }
+  95%          { opacity: 0.92; }
+}
+body.crt-on { animation: crt-flicker 5s ease-in-out infinite; }
+
+/* ── Fisheye (barrel distortion) ── */
+body.fisheye-on {
+  /* perspective 製造彎曲感 */
+  perspective: 900px;
+}
+body.fisheye-on main {
+  transform: perspective(1100px) scale(1.012);
+  border-radius: 12px;
+  overflow: hidden;
+  /* CSS-only barrel — 邊緣壓暗 */
+  box-shadow:
+    inset 0 0 80px rgba(0,0,0,0.45),
+    inset 0 0 200px rgba(0,0,0,0.25);
+}
+/* 螢光文字發光（開啟 CRT 時） */
+body.crt-on {
+  --glow: 0 0 8px rgba(0,255,80,0.12);
+  text-shadow: var(--glow);
+}
+body.crt-on .text-accent,
+body.crt-on .font-serif-display.text-accent {
+  text-shadow: 0 0 14px color-mix(in oklab, var(--accent) 80%, transparent);
+}
