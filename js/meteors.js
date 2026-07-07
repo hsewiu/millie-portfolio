@@ -7,26 +7,40 @@
 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  // ASCII 尾巴字元：由淡到濃（左＝尾端、右＝靠近星頭）
-  const TAIL_CHARS  = ['.', '·', ':', '-', '=', '≡'];
-  const SPARK_CHARS = ['+', '*', '×', '·', '°'];
+  // 字元網格風格：尾巴依位置分三層——尾端暗雜訊 → 中段記號 → 頭部亮方塊
+  const TIER_CHARS = [
+    ['.', ':', '-', '0', '1'],   // 暗（尾端）
+    ['+', '×', '*', '0', '1'],   // 中
+    ['■', '▲', '#'],             // 亮（近星頭）
+  ];
+  const SPARK_CHARS = ['▲', '■', '+', '×', '0', '1'];
 
-  function buildTail() {
+  function pickChar(tier) {
+    const set = TIER_CHARS[tier];
+    return set[Math.floor(Math.random() * set.length)];
+  }
+
+  function buildTail(m) {
     const n = 9 + Math.floor(Math.random() * 6);
-    let tail = '';
     for (let i = 0; i < n; i++) {
       const t = i / (n - 1); // 0 尾端 → 1 頭部
-      const jitter = 0.75 + Math.random() * 0.5;
-      const idx = Math.min(TAIL_CHARS.length - 1, Math.floor(t * TAIL_CHARS.length * jitter));
-      tail += TAIL_CHARS[Math.max(0, idx)];
+      const tier = t > 0.72 ? 2 : (t > 0.4 ? 1 : 0);
+      const c = document.createElement('span');
+      c.className = 'tail-ch';
+      c.dataset.tier = tier;
+      c.textContent = pickChar(tier);
+      c.style.opacity = (0.35 + t * 0.65).toFixed(2);
+      c.style.setProperty('--tf-dur', (0.3 + Math.random() * 0.5).toFixed(2) + 's');
+      c.style.setProperty('--tf-delay', (Math.random() * 0.5).toFixed(2) + 's');
+      c.style.setProperty('--tf-low', (0.25 + Math.random() * 0.35).toFixed(2));
+      m.appendChild(c);
     }
-    return tail;
   }
 
   function spawnMeteor() {
     const m = document.createElement('div');
     m.className = 'meteor';
-    m.textContent = buildTail();
+    buildTail(m);
     // 起點：偏畫面上半部、中間偏右，往左下劃過
     m.style.top  = (Math.random() * 55) + 'vh';
     m.style.left = (25 + Math.random() * 75) + 'vw';
@@ -53,7 +67,19 @@
     m.appendChild(msg);
 
     layer.appendChild(m);
-    m.addEventListener('animationend', () => m.remove());
+
+    // 字元突變：仿影片中雜訊場不斷變化的效果，每拍隨機換掉 1～2 個尾巴字元
+    const chars = m.querySelectorAll('.tail-ch');
+    const mutate = setInterval(() => {
+      for (let i = 0; i < 1 + Math.floor(Math.random() * 2); i++) {
+        const c = chars[Math.floor(Math.random() * chars.length)];
+        c.textContent = pickChar(+c.dataset.tier);
+      }
+    }, 130);
+
+    m.addEventListener('animationend', (e) => {
+      if (e.target === m) { clearInterval(mutate); m.remove(); }
+    });
   }
 
   (function loop() {

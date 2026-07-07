@@ -245,15 +245,16 @@ body[data-personal-dark="true"] .personal-section .chip {
   font-size: var(--meteor-star, 13px);
   line-height: 1;
   white-space: pre;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   color: rgba(250,250,247,.9);
-  text-shadow: 0 0 6px rgba(250,250,247,.4);
+  text-shadow: 0 0 3px rgba(250,250,247,.25); /* 網格風格：字元銳利、光暈收斂 */
   /* 上下 padding 加大 hover 命中範圍；右側留給 ★ 星頭（落在遮罩內） */
   padding: 12px 1.3em 12px 6px;
   /* 尾端漸淡（連同粒子一起淡出） */
   -webkit-mask-image: linear-gradient(90deg, transparent, #000 80%);
   mask-image: linear-gradient(90deg, transparent, #000 80%);
-  animation: meteor-fall var(--meteor-dur, 1.2s) linear forwards;
+  /* steps() 量化移動：一格一格跳，貼齊字元網格的節奏 */
+  animation: meteor-fall var(--meteor-dur, 1.2s) steps(42, end) forwards;
   pointer-events: auto;  /* 圖層本身不擋滑鼠，但流星可被抓 */
   cursor: pointer;
 }
@@ -328,6 +329,14 @@ body[data-personal-dark="true"] .personal-section .chip {
       -1.5px 0 0 rgba(255,60,220,.6),
       1.5px 0 0 rgba(80,255,200,.6);
   }
+}
+/* 尾巴字元：各自明滅閃爍（雜訊場感） */
+.meteor .tail-ch {
+  animation: tail-flicker var(--tf-dur, .5s) steps(2) var(--tf-delay, 0s) infinite;
+}
+@keyframes tail-flicker {
+  0%, 100% { filter: brightness(1); }
+  50%      { filter: brightness(var(--tf-low, .4)); }
 }
 /* 尾巴迸出的 ASCII 光粒子 — steps() 讓移動帶顆粒跳動感 */
 .meteor .spark {
